@@ -1,6 +1,5 @@
 import { Layout, Menu } from "antd";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/Header.css";
 import DevelopCenter from "./DevelopCenter";
 import Login from "./Login";
@@ -10,15 +9,20 @@ import Search from "./Search";
 export default function Header() {
   const { Header } = Layout;
   const navigator = useNavigate();
+  const location = useLocation();
   const moveTo = (route: string) => {
     navigator(route);
   };
   return (
     <Header className="header_container">
       <Logo />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["homePage"]}>
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={[location.pathname]}
+      >
         <Menu.Item
-          key={"homePage"}
+          key={"/"}
           onClick={() => {
             moveTo("/");
           }}
@@ -26,7 +30,7 @@ export default function Header() {
           发现音乐
         </Menu.Item>
         <Menu.Item
-          key={"my"}
+          key={"/my"}
           onClick={() => {
             moveTo("my");
           }}
@@ -34,7 +38,7 @@ export default function Header() {
           我的音乐
         </Menu.Item>
         <Menu.Item
-          key={"friend"}
+          key={"/friend"}
           onClick={() => {
             moveTo("friend");
           }}
@@ -42,7 +46,7 @@ export default function Header() {
           朋友
         </Menu.Item>
         <Menu.Item
-          key={"shop"}
+          key={"/shop"}
           onClick={() => {
             moveTo("shop");
           }}
@@ -50,7 +54,7 @@ export default function Header() {
           商城
         </Menu.Item>
         <Menu.Item
-          key={"musician"}
+          key={"/musician"}
           onClick={() => {
             moveTo("musician");
           }}
@@ -58,7 +62,7 @@ export default function Header() {
           音乐人
         </Menu.Item>
         <Menu.Item
-          key={"download"}
+          key={"/download"}
           onClick={() => {
             moveTo("download");
           }}
