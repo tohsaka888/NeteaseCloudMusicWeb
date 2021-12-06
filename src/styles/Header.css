@@ -1,0 +1,33 @@
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: black !important;
+}
+
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+  background-color: black !important;
+}
+
+.ant-layout-header {
+  background-color: #242424 !important;
+}
+
+.ant-menu.ant-menu-dark {
+  background-color: #242424 !important;
+}
+
+.header_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  border-radius: 32px !important;
+  width: 158px !important;
+  margin-left: 50px;
+}
+
+.login {
+  margin-left: 8px;
+  background-color: rgb(204, 27, 27) !important;
+  border: none !important;
+}
