@@ -6,18 +6,15 @@
   background-color: black !important;
 }
 
-.ant-layout-header {
-  background-color: #242424 !important;
-}
-
-.ant-menu.ant-menu-dark {
-  background-color: #242424 !important;
-}
-
 .header_container {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #242424 !important;
+}
+
+.header_menu {
+  background-color: #242424 !important;
 }
 
 .search {
@@ -30,4 +27,10 @@
   margin-left: 8px;
   background-color: rgb(204, 27, 27) !important;
   border: none !important;
+}
+
+.footer_menu {
+  line-height: 35px !important;
+  background-color: transparent !important;
+  margin-left: 420px !important;
 }
