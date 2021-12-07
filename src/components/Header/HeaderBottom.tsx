@@ -13,14 +13,16 @@ const Container = styled.div`
   height: 35px;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const Menu = styled.div`
   background-color: transparent;
   height: 100%;
-  margin-left: 420px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-right: 200px;
 `;
 
 type ItemProps = {
