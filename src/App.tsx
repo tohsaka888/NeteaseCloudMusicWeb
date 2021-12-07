@@ -23,8 +23,8 @@ function App() {
         <Route path="my" element={<MyMusic />} />
         <Route path="friend" element={<Friend />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="discover/musician" element={<Musician />} />
-        <Route path="discover/download" element={<Download />} />
+        <Route path="musician" element={<Musician />} />
+        <Route path="download" element={<Download />} />
         <Route path="discover/toplist" element={<Toplist />} />
         <Route path="discover/playlist" element={<Playlist />} />
         <Route path="discover/djradio" element={<DjRadio />} />
