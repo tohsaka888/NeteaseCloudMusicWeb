@@ -1,7 +1,10 @@
 import { Carousel } from "antd";
-import React, { useEffect, useState } from "react";
+import { CarouselRef } from "antd/lib/carousel";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { BannerContext } from "../../context/HomePage/Context";
 import { sendRequest } from "../../request/HomePage/Banner";
+import SwitchButton from "./SwitchButton";
 
 type ContainerProps = {
   currentUrl: string;
@@ -43,6 +46,7 @@ const Download = styled.div`
 
 export default function Banner() {
   const [banners, setBanners] = useState<any[]>([]);
+  const bannerRef = useRef<CarouselRef>();
   useEffect(() => {
     const getBanners = async () => {
       const data = await sendRequest();
@@ -51,9 +55,20 @@ export default function Banner() {
     getBanners();
   }, []);
   return (
-    <>
+    <BannerContext.Provider value={{ bannerRef: bannerRef }}>
       <Download />
-      <Carousel dots={{className: 'dots'}} autoplay effect="fade">
+      <SwitchButton direction="left" />
+      <SwitchButton direction="right" />
+      <Carousel
+        ref={(refs) => {
+          if (refs) {
+            bannerRef.current = refs;
+          }
+        }}
+        dots={{ className: "dots" }}
+        autoplay
+        effect="fade"
+      >
         {banners.map((item, index) => {
           return (
             <Container key={index} currentUrl={item.imageUrl}>
@@ -64,6 +79,6 @@ export default function Banner() {
           );
         })}
       </Carousel>
-    </>
+    </BannerContext.Provider>
   );
 }
