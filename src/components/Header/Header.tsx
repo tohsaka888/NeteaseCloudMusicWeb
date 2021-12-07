@@ -1,6 +1,7 @@
 import { Layout, Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../styles/Header.css";
+import BottomButton from "./BottomButton";
 import DevelopCenter from "./DevelopCenter";
 import HeaderBottom from "./HeaderBottom";
 import Login from "./Login";
@@ -31,6 +32,7 @@ export default function Header() {
             }}
           >
             发现音乐
+            <BottomButton />
           </Menu.Item>
           <Menu.Item
             key={"/my"}
@@ -77,7 +79,7 @@ export default function Header() {
         <DevelopCenter />
         <Login />
       </Header>
-      <HeaderBottom />
+      <HeaderBottom defaultSelectedKey="/" />
     </>
   );
 }
