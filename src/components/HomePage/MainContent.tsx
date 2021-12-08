@@ -1,6 +1,7 @@
 import { ArrowRightOutlined, StarFilled } from "@ant-design/icons";
 import React from "react";
 import styled from "styled-components";
+import HotPlaylists from "./HotPlaylists";
 
 const Containner = styled.div`
   width: 48vw;
@@ -30,6 +31,10 @@ const Item = styled.div`
   font-size: 12px;
   margin-right: 8px;
   color: #666;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 `;
 
 const Front = styled.div`
@@ -46,6 +51,9 @@ const More = styled.div`
   align-items: center;
   justify-content: flex-end;
   float: right;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default function MainContent() {
@@ -53,7 +61,7 @@ export default function MainContent() {
     <Containner>
       <Title>
         <Front>
-          <StarFilled style={{ color: "#c10d0c", marginRight: "6px"  }} />
+          <StarFilled style={{ color: "#c10d0c", marginRight: "6px" }} />
           <div>热门推荐</div>
           <SimpleMenu>
             <Item>华语</Item>
@@ -78,6 +86,13 @@ export default function MainContent() {
             }}
           />
         </More>
+      </Title>
+      <HotPlaylists />
+      <Title>
+        <Front>
+          <StarFilled style={{ color: "#c10d0c", marginRight: "6px" }} />
+          <div>热门推荐</div>
+        </Front>
       </Title>
     </Containner>
   );
