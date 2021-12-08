@@ -1,4 +1,4 @@
-import { Carousel } from "antd";
+import { Carousel, message } from "antd";
 import { CarouselRef } from "antd/lib/carousel";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -50,7 +50,11 @@ export default function Banner() {
   useEffect(() => {
     const getBanners = async () => {
       const data = await sendRequest();
-      setBanners(data);
+      if (!data.fail) {
+        setBanners(data);
+      } else {
+        message.error({ content: data.errmsg, key: "networkError" });
+      }
     };
     getBanners();
   }, []);
