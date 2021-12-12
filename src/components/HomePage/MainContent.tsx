@@ -91,7 +91,7 @@ export default function MainContent() {
       <Title>
         <Front>
           <StarFilled style={{ color: "#c10d0c", marginRight: "6px" }} />
-          <div>热门推荐</div>
+          <div>个性推荐</div>
         </Front>
       </Title>
     </Containner>
