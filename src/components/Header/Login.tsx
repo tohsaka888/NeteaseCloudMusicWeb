@@ -21,8 +21,8 @@ const Title = styled.div`
 const LoginImage = styled.div`
   background-image: url("https://s2.music.126.net/style/web2/img/qr_guide.png?7ef838ff1a2a41bd5f79df00dcfe5a04");
   float: left;
-  width: 125px;
-  height: 220px;
+  width: 150px;
+  height: 265px;
   background-size: contain;
 `;
 
@@ -37,16 +37,55 @@ const Container = styled.div`
 
 const QRCodeArea = styled.div`
   margin-left: 25px;
-  width: 10vw;
+  width: 12vw;
   height: 220px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const QRCodeTitle = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  text-align: center;
 `;
 
-const QrCode = styled.img``;
+const QrCode = styled.img`
+  width: 160px;
+  height: 160px;
+`;
+
+const QrInfo = styled.div`
+  margin-top: 8px;
+  font-size: 13px;
+`;
+
+const QrLink = styled.span`
+  color: #0c73c2;
+  cursor: pointer;
+`;
+
+const AnotherLogin = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 17vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px 5px;
+  border-radius: 15px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 16px;
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function Login() {
   const [visible, setVisible] = useState<boolean>(false);
@@ -127,10 +166,6 @@ export default function Login() {
         bodyStyle={{
           minHeight: "332px",
           width: "40vw",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "38px 0 20px",
         }}
         title={
           <Title
@@ -158,11 +193,17 @@ export default function Login() {
           </Draggable>
         )}
       >
-        <LoginImage />
-        <QRCodeArea>
-          <QRCodeTitle>扫码登录</QRCodeTitle>
-          <QrCode src={qrUrl} alt="qrUrl" />
-        </QRCodeArea>
+        <LoginContainer>
+          <LoginImage />
+          <QRCodeArea>
+            <QRCodeTitle>扫码登录</QRCodeTitle>
+            <QrCode src={qrUrl} alt="qrUrl" />
+            <QrInfo>
+              使用 <QrLink>网易云音乐APP</QrLink> 扫码登录
+            </QrInfo>
+          </QRCodeArea>
+        </LoginContainer>
+        <AnotherLogin>选择其他方式登录</AnotherLogin>
       </Modal>
     </>
   );
