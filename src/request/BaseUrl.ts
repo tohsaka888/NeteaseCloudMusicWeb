@@ -1,3 +1,5 @@
-const BaseUrl = "http://81.68.113.218:3000";
+const BaseUrl = "https://music-api.heheda.top";
 
-export { BaseUrl };
+const httpHeader = { "Content-Type": "application/json;charset=utf-8" };
+
+export { BaseUrl, httpHeader };
