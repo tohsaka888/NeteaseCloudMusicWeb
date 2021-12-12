@@ -1,11 +1,15 @@
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import Draggable, {
   DraggableBounds,
   DraggableEventHandler,
 } from "react-draggable";
 import styled from "styled-components";
-import { createQRCode, createQRKey } from "../../request/Header/Login";
+import {
+  checkQRStatus,
+  createQRCode,
+  createQRKey,
+} from "../../request/Header/Login";
 import "../../styles/Header.css";
 
 const Title = styled.div`
@@ -42,9 +46,15 @@ const QRCodeTitle = styled.div`
   font-size: 1.5rem;
 `;
 
+const QrCode = styled.img``;
+
 export default function Login() {
   const [visible, setVisible] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [qrUrl, setQrUrl] = useState<string>("");
+  // const [qrStatus, setQrStatus] = useState<any>();
+  // const qrStatusRef = useRef<any>();
+  // const [id, setId] = useState<any>();
   const [bounds, setBounds] = useState<DraggableBounds>({
     left: 0,
     top: 0,
@@ -72,8 +82,31 @@ export default function Login() {
     setVisible(false);
   };
   useEffect(() => {
-    createQRKey();
-  }, [])
+    let id: NodeJS.Timeout;
+    const callback = async (key: string) => {
+      const data = await checkQRStatus(key);
+      if (data.code === 800 || data.code === 803) {
+        clearInterval(id);
+        if (data.code === 803) {
+          message.success("登录成功");
+        }
+        setVisible(false);
+      }
+    };
+    const sendRequest = async () => {
+      const key: string = await createQRKey();
+      if (key && visible) {
+        const data = await createQRCode(key);
+        setQrUrl(data);
+        id = setInterval(() => {
+          callback(key);
+        }, 3000);
+      }
+    };
+    if (visible) {
+      sendRequest();
+    }
+  }, [visible]);
   return (
     <>
       <Button
@@ -90,6 +123,7 @@ export default function Login() {
         visible={visible}
         onOk={okEvent}
         onCancel={cancelEvent}
+        footer={null}
         bodyStyle={{
           minHeight: "332px",
           width: "40vw",
@@ -127,6 +161,7 @@ export default function Login() {
         <LoginImage />
         <QRCodeArea>
           <QRCodeTitle>扫码登录</QRCodeTitle>
+          <QrCode src={qrUrl} alt="qrUrl" />
         </QRCodeArea>
       </Modal>
     </>
