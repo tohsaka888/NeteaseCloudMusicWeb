@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background: url("https://s2.music.126.net/style/web2/img/index/index.png?8529c8d5d3cdc7e325da5303feb9411d");
+  background: #f1f1f1;
   height: 126px;
   padding-top: 0;
   background-position: 0 0;
@@ -12,6 +12,7 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
+  border: 1px solid #cecece;
 `;
 
 export default function Login() {
