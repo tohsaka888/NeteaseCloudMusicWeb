@@ -7,3 +7,6 @@
   font-size: 4rem;
 }
 
+.album {
+  display: flex !important;
+}
