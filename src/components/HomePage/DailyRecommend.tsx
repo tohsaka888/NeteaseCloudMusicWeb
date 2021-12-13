@@ -117,7 +117,7 @@ export default function DailyRecommend() {
                       <Mask>
                         <PlaylistBottom />
                         <BottomIcon />
-                        <PlayCount>{item.playCount}</PlayCount>
+                        <PlayCount>{item.playcount}</PlayCount>
                         <BottomIconPlay />
                       </Mask>
                       <Typography
