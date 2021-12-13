@@ -53,4 +53,18 @@ const checkQRStatus = async (key: string) => {
   // };
 };
 
-export { createQRCode, createQRKey, checkQRStatus };
+const getLoginStatus = async () => {
+  try {
+    const res = await fetch(`${BaseUrl}/login/status`, {
+      method: "POST",
+      headers: httpHeader,
+      credentials: "include",
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return networkError;
+  }
+};
+
+export { createQRCode, createQRKey, checkQRStatus, getLoginStatus };
