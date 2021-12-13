@@ -39,7 +39,7 @@ const CoverImage = styled.img`
   width: 62px;
   height: 62px;
   float: left;
-  margin-right: 8px;
+  margin-right: 24px;
 `;
 
 const Name = styled.div`
