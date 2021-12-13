@@ -24,7 +24,7 @@ const Mask = styled.div`
   background-position: 0 0;
   width: 140px;
   height: 140px;
-  bottom: 88px;
+  bottom: 89px;
 `;
 
 const PlaylistBottom = styled.div`
