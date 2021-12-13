@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import DailyRecommend from "./DailyRecommend";
 import HotPlaylists from "./HotPlaylists";
+import NewAlbum from "./NewAlbum";
+import Toplist from "./Toplist";
 
 const Containner = styled.div`
   width: 48vw;
@@ -15,6 +17,8 @@ export default function MainContent() {
     <Containner>
       <HotPlaylists />
       <DailyRecommend />
+      <NewAlbum />
+      <Toplist />
     </Containner>
   );
 }
