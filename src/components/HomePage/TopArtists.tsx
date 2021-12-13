@@ -68,7 +68,9 @@ export default function TopArtists() {
               <CoverImage src={item.picUrl} />
               <div>
                 <Name>{item.name}</Name>
-                <div>{item.alias[0] || "暂无"}</div>
+                <div style={{ fontSize: "12px" }}>
+                  {item.alias[0] || "暂无"}
+                </div>
               </div>
             </Item>
           );
