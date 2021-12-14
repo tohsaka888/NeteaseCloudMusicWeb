@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import HotDj from "./HotDj";
 import Login from "./Login";
 import TopArtists from "./TopArtists";
 
@@ -13,6 +14,7 @@ export default function SideContent() {
     <Container>
       <Login />
       <TopArtists />
+      <HotDj />
     </Container>
   );
 }
