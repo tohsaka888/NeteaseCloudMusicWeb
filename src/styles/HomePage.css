@@ -10,3 +10,7 @@
 .album {
   display: flex !important;
 }
+
+.sign {
+  width: 100px !important;
+}
