@@ -1,8 +1,5 @@
 import { StarFilled } from "@ant-design/icons";
-import { Carousel, Typography } from "antd";
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getNewAlbum } from "../../request/HomePage/newAlbum";
 import "../../styles/HomePage.css";
 
 const Container = styled.div`
@@ -12,33 +9,6 @@ const Container = styled.div`
   margin-top: 16px;
   padding-bottom: 36px;
   border: 1px solid #d3d3d3;
-`;
-
-const Area = styled.div`
-  display: flex !important;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 184px;
-`;
-
-const Album = styled.div`
-  width: 100px;
-  height: 100px;
-`;
-
-const CoverImage = styled.img`
-  width: 100px;
-  height: 100px;
-  position: relative;
-`;
-
-const Mask = styled.div`
-  background-image: url("https://s2.music.126.net/style/web2/img/coverall.png?f9954d6e46647002f5b5a3baee070deb");
-  position: absolute;
-  background-position: -1px -570px;
-  width: 118px;
-  height: 100px;
 `;
 
 const Title = styled.div`
@@ -57,17 +27,6 @@ const Front = styled.div`
 `;
 
 export default function Toplist() {
-  const [albums, setAlbums] = useState<any[]>([]);
-  useEffect(() => {
-    const sendRequest = async () => {
-      const data = await getNewAlbum();
-      if (data && !data.fail) {
-        console.log(data);
-        setAlbums(data.album);
-      }
-    };
-    sendRequest();
-  }, []);
   return (
     <>
       <Title>
