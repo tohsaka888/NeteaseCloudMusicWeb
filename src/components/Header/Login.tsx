@@ -1,10 +1,12 @@
-import { Button, message, Modal } from "antd";
-import React, { useEffect, useRef, useState } from "react";
+import { Avatar, Button, message, Modal } from "antd";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Draggable, {
   DraggableBounds,
   DraggableEventHandler,
 } from "react-draggable";
 import styled from "styled-components";
+import { VisibleContext } from "../../context/Context";
+import useLoginStatus from "../../hooks/useLoginStatus";
 import {
   checkQRStatus,
   createQRCode,
@@ -88,7 +90,7 @@ const LoginContainer = styled.div`
 `;
 
 export default function Login() {
-  const [visible, setVisible] = useState<boolean>(false);
+  const props = useContext(VisibleContext)
   const [disabled, setDisabled] = useState<boolean>(false);
   const [qrUrl, setQrUrl] = useState<string>("");
   // const [qrStatus, setQrStatus] = useState<any>();
@@ -101,6 +103,8 @@ export default function Login() {
     right: 0,
   });
   const draggleRef = useRef<HTMLDivElement>();
+  const loginStatus = useLoginStatus();
+  console.log(loginStatus);
   const onStart: DraggableEventHandler = (event, uiData) => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
@@ -115,10 +119,10 @@ export default function Login() {
     });
   };
   const okEvent = () => {
-    setVisible(false);
+    props?.setVisible(false);
   };
   const cancelEvent = () => {
-    setVisible(false);
+    props?.setVisible(false);
   };
   useEffect(() => {
     let id: NodeJS.Timeout;
@@ -129,12 +133,12 @@ export default function Login() {
         if (data.code === 803) {
           message.success("登录成功");
         }
-        setVisible(false);
+        props?.setVisible(false);
       }
     };
     const sendRequest = async () => {
       const key: string = await createQRKey();
-      if (key && visible) {
+      if (key && props?.visible) {
         const data = await createQRCode(key);
         setQrUrl(data);
         id = setInterval(() => {
@@ -142,24 +146,32 @@ export default function Login() {
         }, 3000);
       }
     };
-    if (visible) {
+    if (props?.visible) {
       sendRequest();
     }
-  }, [visible]);
+  }, [props, props?.visible]);
   return (
     <>
-      <Button
-        onClick={() => {
-          setVisible(true);
-        }}
-        type="primary"
-        shape="round"
-        className="login"
-      >
-        登录
-      </Button>
+      {loginStatus.code === 301 && (
+        <Button
+          onClick={() => {
+            props?.setVisible(true);
+          }}
+          type="primary"
+          shape="round"
+          className="login"
+        >
+          登录
+        </Button>
+      )}
+      {loginStatus.code === 200 && (
+        <Avatar
+          style={{ marginLeft: "16px" }}
+          src={loginStatus.profile.avatarUrl}
+        />
+      )}
       <Modal
-        visible={visible}
+        visible={props?.visible}
         onOk={okEvent}
         onCancel={cancelEvent}
         footer={null}
