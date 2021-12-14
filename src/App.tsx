@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
+import { VisibleContext } from "./context/Context";
 import Album from "./pages/Album";
 import Artist from "./pages/Artist";
 import DjRadio from "./pages/DjRadio";
@@ -14,8 +15,9 @@ import Shop from "./pages/Shop";
 import Toplist from "./pages/Toplist";
 
 function App() {
+  const [visible, setVisible] = useState<boolean>(false)
   return (
-    <>
+    <VisibleContext.Provider value={{visible: visible, setVisible: setVisible}}>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -31,7 +33,7 @@ function App() {
         <Route path="discover/artist" element={<Artist />} />
         <Route path="discover/album" element={<Album />} />
       </Routes>
-    </>
+    </VisibleContext.Provider>
   );
 }
 
