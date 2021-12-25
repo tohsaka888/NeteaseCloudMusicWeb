@@ -1,9 +1,14 @@
-import React from 'react'
+import { Layout } from "antd";
+import React from "react";
+import Content from "../components/My/Content";
+import Sider from "../components/My/Sider";
+import "../styles/MyMusic.css"
 
 export default function MyMusic() {
   return (
-    <div>
-      MyMusic
-    </div>
-  )
+    <Layout className="container">
+      <Sider />
+      <Content />
+    </Layout>
+  );
 }
