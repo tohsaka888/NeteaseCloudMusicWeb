@@ -29,7 +29,7 @@ export default function HomePage() {
       sendRequest();
       setUserData(userData);
     }
-    console.log(sessionStorage.getItem("userData"));
+    // console.log(sessionStorage.getItem("userData"));
   }, [userData]);
   return (
     <Content className="content">

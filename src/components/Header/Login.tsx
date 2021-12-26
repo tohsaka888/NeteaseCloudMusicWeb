@@ -104,7 +104,6 @@ export default function Login() {
   });
   const draggleRef = useRef<HTMLDivElement>();
   const loginStatus = useLoginStatus();
-  console.log(loginStatus);
   const onStart: DraggableEventHandler = (event, uiData) => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
