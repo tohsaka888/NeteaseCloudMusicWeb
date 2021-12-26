@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import Musician from "./pages/Musician";
 import MyMusic from "./pages/MyMusic";
 import Playlist from "./pages/Playlist";
+import PlaylistDetail from "./pages/PlaylistDetail";
 import Shop from "./pages/Shop";
 import Toplist from "./pages/Toplist";
 
@@ -22,7 +23,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="discover" element={<HomePage />} />
-        <Route path="my" element={<MyMusic />} />
+        <Route path="my" element={<MyMusic />}>
+          <Route path=":id" element={<PlaylistDetail />} />
+        </Route>
         <Route path="friend" element={<Friend />} />
         <Route path="shop" element={<Shop />} />
         <Route path="musician" element={<Musician />} />
