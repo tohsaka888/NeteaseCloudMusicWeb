@@ -61,7 +61,7 @@ export default function HotDj() {
                 ellipsis={{ rows: 2 }}
                 style={{
                   marginBottom: "5px",
-                  fontSize: "16px",
+                  fontSize: "14px",
                   fontWeight: "bold",
                 }}
               >
@@ -69,7 +69,7 @@ export default function HotDj() {
               </Typography.Paragraph>
               <Typography.Paragraph
                 ellipsis={{ rows: 2 }}
-                style={{ margin: 0, fontSize: "12px" }}
+                style={{ margin: 0, fontSize: "10px" }}
               >
                 {item.dj.signature || "这个人很懒,没有留下签名"}
               </Typography.Paragraph>
