@@ -61,7 +61,6 @@ export default function NewAlbum() {
     const sendRequest = async () => {
       const data = await getNewAlbum();
       if (data && !data.fail) {
-        console.log(data);
         setAlbums(data.album);
       }
     };
