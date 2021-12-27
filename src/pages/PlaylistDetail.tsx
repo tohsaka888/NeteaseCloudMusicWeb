@@ -2,6 +2,7 @@ import { Spin } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import MusicList from "../components/PlaylistDetail/MusicList";
 import PlaylistInfo from "../components/PlaylistDetail/PlaylistInfo";
 import useHttpRequest from "../hooks/useHttpRequest";
 
@@ -12,6 +13,11 @@ const LoadingContainer = styled.div`
   width: 100%;
   height: 60vh;
   padding-bottom: "20vh";
+`;
+
+const Container = styled.div`
+  background-color: white;
+  border: 1px solid rgb(211, 211, 211);
 `;
 
 export default function PlaylistDetail() {
@@ -31,14 +37,17 @@ export default function PlaylistDetail() {
     }
   }, [data.playlist, params.id]);
   return (
-    <>
+    <Container>
       {isLoading ? (
         <LoadingContainer>
           <Spin tip="loading......" delay={300} />
         </LoadingContainer>
       ) : (
-        <PlaylistInfo info={data.playlist} />
+        <>
+          <PlaylistInfo info={data.playlist} />
+          <MusicList info={data.playlist} />
+        </>
       )}
-    </>
+    </Container>
   );
 }
