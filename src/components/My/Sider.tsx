@@ -1,12 +1,13 @@
 import { Layout, Menu } from "antd";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useLoginStatus from "../../hooks/useLoginStatus";
 import { getUserPlaylist } from "../../request/my/Sider";
 import "../../styles/MyMusic.css";
 
 export default function Sider() {
   const loginStatus = useLoginStatus();
+  const params = useParams();
   const [playlists, setPlaylists] = useState<any[]>([]);
   const navigator = useNavigate();
   useEffect(() => {
@@ -17,22 +18,44 @@ export default function Sider() {
           const data = await getUserPlaylist(id);
           if (data.code === 200) {
             setPlaylists(data.playlist);
+            if (!params.id) {
+              navigator(`./${data.playlist[0].id}`);
+            }
           }
         }
       }
     };
     sendRequest();
-  }, [loginStatus]);
-  
+  }, [loginStatus, navigator, params.id]);
 
   return (
-    <Layout.Sider theme="light" className="sider">
+    <Layout.Sider
+      theme="light"
+      className="sider"
+      style={{
+        position: "fixed",
+        height: "87vh",
+        overflow: "auto",
+        borderLeft: "2px solid #f9f9f9",
+      }}
+    >
       {playlists.length && (
-        <Menu theme="light" defaultSelectedKeys={[playlists[0].id.toString()]}>
+        <Menu
+          theme="light"
+          mode="inline"
+          defaultSelectedKeys={[playlists[0].id.toString()]}
+        >
           {playlists.map((item: any) => {
-            return <Menu.Item key={item.id} onClick={() => {
-              navigator(`./${item.id}`)
-            }}>{item.name}</Menu.Item>;
+            return (
+              <Menu.Item
+                key={item.id}
+                onClick={() => {
+                  navigator(`./${item.id}`);
+                }}
+              >
+                {item.name}
+              </Menu.Item>
+            );
           })}
         </Menu>
       )}
