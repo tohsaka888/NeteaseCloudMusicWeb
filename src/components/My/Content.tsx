@@ -9,13 +9,17 @@ export default function Content() {
         height: "87vh",
         marginLeft: "13vw",
         position: "fixed",
-        width: "50vw",
+        width: "69vw",
         borderLeft: "1px solid #f9f9f9",
-        background: "white",
+        background: "#f9f9f9",
         borderRight: "2px solid #e2e2e2",
+        overflow: "auto",
+        paddingRight: "18vw",
       }}
     >
-      <Outlet />
+      <div style={{ background: "white", height: "100%" }}>
+        <Outlet />
+      </div>
     </Layout.Content>
   );
 }
