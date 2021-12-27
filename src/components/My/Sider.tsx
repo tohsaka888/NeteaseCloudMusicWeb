@@ -36,7 +36,7 @@ export default function Sider() {
         position: "fixed",
         height: "87vh",
         overflow: "auto",
-        borderLeft: "2px solid #f9f9f9",
+        borderLeft: "1px solid rgb(211, 211, 211)",
       }}
     >
       {playlists.length && (
