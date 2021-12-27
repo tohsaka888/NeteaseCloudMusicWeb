@@ -1,14 +1,44 @@
+import { Spin } from "antd";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import PlaylistInfo from "../components/PlaylistDetail/PlaylistInfo";
 import useHttpRequest from "../hooks/useHttpRequest";
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
+  padding-bottom: "20vh";
+`;
 
 export default function PlaylistDetail() {
   const params = useParams();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const data = useHttpRequest({
     api: "/playlist/detail",
     method: "GET",
     credentials: "include",
     requestData: JSON.stringify({ id: params.id }),
   });
-  console.log(data);
-  return <>{data.code === 200 && <div>{data.playlist.name}</div>}</>;
+  useEffect(() => {
+    if (data.playlist && params.id && data.playlist.id === +params.id) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [data.playlist, params.id]);
+  return (
+    <>
+      {isLoading ? (
+        <LoadingContainer>
+          <Spin tip="loading......" delay={300} />
+        </LoadingContainer>
+      ) : (
+        <PlaylistInfo info={data.playlist} />
+      )}
+    </>
+  );
 }
