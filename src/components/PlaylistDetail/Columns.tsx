@@ -1,14 +1,16 @@
-import { PlayCircleOutlined } from "@ant-design/icons";
+// import { PlayCircleOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/lib/table";
 import moment from "moment";
 import styled from "styled-components";
+// import usePlayMusic from "../../hooks/usePlayMusic";
+import TableIndex from "./TableIndex";
 
-const Index = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: #333333;
-`;
+// const Index = styled.div`
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   color: #333333;
+// `;
 
 const TextEllpsis = styled.div`
   overflow: hidden;
@@ -24,12 +26,7 @@ export const columns: ColumnsType<any> = [
     width: "10%",
     ellipsis: true,
     render: (value, record, index) => {
-      return (
-        <Index>
-          <div style={{ color: "#333333" }}>{index + 1}</div>
-          <PlayCircleOutlined color="#333333" />
-        </Index>
-      );
+      return <TableIndex value={value} record={record} index={index} />;
     },
   },
   {
