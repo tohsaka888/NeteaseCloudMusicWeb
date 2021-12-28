@@ -5,6 +5,15 @@ type VisibleProps = {
   setVisible: Function;
 };
 
+type MusicPlayProps = {
+  record: any;
+  musicUrl: string;
+  setRecord: Function;
+  setMusicUrl: Function;
+};
+
 const VisibleContext = createContext<VisibleProps | null>(null);
 
-export { VisibleContext };
+const MusicPlayContext = createContext<MusicPlayProps | null>(null);
+
+export { VisibleContext, MusicPlayContext };
