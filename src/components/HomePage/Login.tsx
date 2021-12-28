@@ -91,7 +91,7 @@ export default function Login() {
   const loginStatus = useLoginStatus();
   return (
     <>
-      {loginStatus.code === 301 && (
+      {!loginStatus.profile && (
         <Container code={loginStatus.code}>
           登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机
           <Button
@@ -111,7 +111,7 @@ export default function Login() {
           </Button>
         </Container>
       )}
-      {loginStatus.code === 200 && (
+      {loginStatus.profile && (
         <Container code={loginStatus.code}>
           <TopArea>
             <Avatar src={loginStatus.profile.avatarUrl} />
