@@ -90,7 +90,7 @@ const LoginContainer = styled.div`
 `;
 
 export default function Login() {
-  const props = useContext(VisibleContext)
+  const props = useContext(VisibleContext);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [qrUrl, setQrUrl] = useState<string>("");
   // const [qrStatus, setQrStatus] = useState<any>();
@@ -151,7 +151,7 @@ export default function Login() {
   }, [props, props?.visible]);
   return (
     <>
-      {loginStatus.code === 301 && (
+      {!loginStatus.profile && (
         <Button
           onClick={() => {
             props?.setVisible(true);
@@ -163,7 +163,7 @@ export default function Login() {
           登录
         </Button>
       )}
-      {loginStatus.code === 200 && (
+      {loginStatus.profile && (
         <Avatar
           style={{ marginLeft: "16px" }}
           src={loginStatus.profile.avatarUrl}
