@@ -1,14 +1,16 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useLoginStatus from "../../hooks/useLoginStatus";
 import { getUserPlaylist } from "../../request/my/Sider";
 import "../../styles/MyMusic.css";
+import SiderItem from "./SiderItem";
 
 export default function Sider() {
   const loginStatus = useLoginStatus();
   const params = useParams();
-  const [playlists, setPlaylists] = useState<any[]>([]);
+  const [created, setCreated] = useState<any[]>([]);
+  const [favour, setFavour] = useState<any[]>([]);
   const navigator = useNavigate();
   useEffect(() => {
     const sendRequest = async () => {
@@ -17,7 +19,20 @@ export default function Sider() {
         if (id) {
           const data = await getUserPlaylist(id);
           if (data.code === 200) {
-            setPlaylists(data.playlist);
+            let playlist = data.playlist;
+            let userPlaylists: any[] = [];
+            let favourPlaylists: any[] = [];
+            if (playlist.length) {
+              playlist.forEach((item: any) => {
+                if (item.userId === id) {
+                  userPlaylists.push(item);
+                } else {
+                  favourPlaylists.push(item);
+                }
+              });
+              setCreated(userPlaylists);
+              setFavour(favourPlaylists);
+            }
             if (!params.id) {
               navigator(`./${data.playlist[0].id}`);
             }
@@ -32,32 +47,55 @@ export default function Sider() {
     <Layout.Sider
       theme="light"
       className="sider"
+      width={"15vw"}
       style={{
         position: "fixed",
         height: "87vh",
         overflow: "auto",
         borderLeft: "1px solid rgb(211, 211, 211)",
+        textAlign: "center",
       }}
     >
-      {playlists.length && (
+      {created.length !== 0 ? (
         <Menu
           theme="light"
           mode="inline"
-          defaultSelectedKeys={[playlists[0].id.toString()]}
+          defaultSelectedKeys={[created[0].id.toString()]}
+          defaultOpenKeys={["created"]}
         >
-          {playlists.map((item: any) => {
-            return (
-              <Menu.Item
-                key={item.id}
-                onClick={() => {
-                  navigator(`./${item.id}`);
-                }}
-              >
-                {item.name}
-              </Menu.Item>
-            );
-          })}
+          <Menu.SubMenu key={"created"} title={"我创建的歌单"}>
+            {created.map((item: any) => {
+              return (
+                <Menu.Item
+                  style={{ height: "60px", paddingLeft: "24px" }}
+                  key={item.id}
+                  onClick={() => {
+                    navigator(`./${item.id}`);
+                  }}
+                >
+                  <SiderItem info={item} />
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+          <Menu.SubMenu key={"favour"} title={"我收藏的歌单"}>
+            {favour.map((item: any) => {
+              return (
+                <Menu.Item
+                  style={{ height: "60px", paddingLeft: "24px" }}
+                  key={item.id}
+                  onClick={() => {
+                    navigator(`./${item.id}`);
+                  }}
+                >
+                  <SiderItem info={item} />
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
         </Menu>
+      ) : (
+        <Spin tip="loading......" style={{ marginTop: "40vh" }} />
       )}
     </Layout.Sider>
   );
