@@ -47,6 +47,7 @@ const MusicName = styled.h2`
   white-space: nowrap;
   word-wrap: normal;
   margin-top: 0.5rem;
+  margin-left: 8px;
 `;
 
 const TextArea = styled.div`
