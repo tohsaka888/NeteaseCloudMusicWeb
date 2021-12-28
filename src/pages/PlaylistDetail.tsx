@@ -11,13 +11,14 @@ const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 60vh;
-  padding-bottom: "20vh";
+  height: 90vh;
+  padding-bottom: "30vh";
 `;
 
 const Container = styled.div`
   background-color: white;
   border: 1px solid rgb(211, 211, 211);
+  border-bottom: 0px;
 `;
 
 export default function PlaylistDetail() {

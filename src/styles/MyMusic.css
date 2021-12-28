@@ -3,6 +3,7 @@
   display: flex;
   width: 64vw;
   background-color: #f9f9f9 !important;
+  height: 86vh;
 }
 
 .sider {
@@ -13,4 +14,22 @@
 
 body {
   background-color: #f9f9f9 !important;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  /* border-radius: 10px; */
+  width: 8px;
+  /* background-color: red; */
+}
+
+::-webkit-scrollbar-thumb {
+  width: 8px;
+  height: 10px;
+  background-color: #cecece;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+  height: 30px;
 }
