@@ -12,8 +12,22 @@ type MusicPlayProps = {
   setMusicUrl: Function;
 };
 
+type LoginProps = {
+  isLogin: boolean;
+  setIsLogin: Function;
+  loginStatus: any;
+  setLoginStatus: Function;
+};
+
 const VisibleContext = createContext<VisibleProps | null>(null);
 
 const MusicPlayContext = createContext<MusicPlayProps | null>(null);
 
-export { VisibleContext, MusicPlayContext };
+const LoginContext = createContext<LoginProps>({
+  isLogin: false,
+  setIsLogin: () => {},
+  loginStatus: null,
+  setLoginStatus: () => {},
+});
+
+export { VisibleContext, MusicPlayContext, LoginContext };
