@@ -56,7 +56,7 @@ export default function MusicList({ info }: Props) {
         columns={columns}
         rowKey={(record) => record.id}
         dataSource={info.tracks}
-        pagination={{ pageSize: 50 }}
+        pagination={{ defaultPageSize: 50 }}
       />
     </>
   );
