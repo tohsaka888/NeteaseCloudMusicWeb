@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
-import { networkError } from "../request/Errors";
+import { useCallback, useContext } from "react";
+import { LoginContext } from "../context/Context";
+// import { networkError } from "../request/Errors";
 import { getLoginStatus } from "../request/Header/Login";
 
 export default function useLoginStatus() {
-  const [loginStatus, setLoginStatus] = useState<any>({ code: 301 });
-  useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const data = await getLoginStatus();
-        setLoginStatus(data.data);
-      } catch (error) {
-        return networkError;
-      }
-    };
-    sendRequest();
-  }, []);
-  return loginStatus;
+  const loginProps = useContext(LoginContext);
+
+  const sendRequest = useCallback(() => {
+    setTimeout(async () => {
+      const data = await getLoginStatus();
+      loginProps?.setLoginStatus(data.data);
+    }, 500);
+  }, [loginProps]);
+  return sendRequest;
 }
