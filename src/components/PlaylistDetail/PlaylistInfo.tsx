@@ -31,6 +31,7 @@ const MusicPicture = styled.img`
 const Title = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 8px;
 `;
 
 const Tag = styled.div`
@@ -41,13 +42,15 @@ const Tag = styled.div`
   background-position: 0 -243px;
 `;
 
-const MusicName = styled.h2`
+const MusicName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   margin-left: 8px;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const TextArea = styled.div`
@@ -71,6 +74,7 @@ const UserName = styled.div`
 const Creator = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 12px;
 `;
 
 const Time = styled.div`
