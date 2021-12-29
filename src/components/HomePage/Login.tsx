@@ -1,8 +1,8 @@
 import { Button } from "antd";
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { VisibleContext } from "../../context/Context";
-import useLoginStatus from "../../hooks/useLoginStatus";
+import { LoginContext, VisibleContext } from "../../context/Context";
+// import useLoginStatus from "../../hooks/useLoginStatus";
 import "../../styles/HomePage.css";
 
 type ContainerProps = {
@@ -88,11 +88,15 @@ const Number = styled.div`
 
 export default function Login() {
   const props = useContext(VisibleContext);
-  const loginStatus = useLoginStatus();
+  const loginProps = useContext(LoginContext);
+  // const sendRequest = useLoginStatus();
+  // useEffect(() => {
+  //   sendRequest();
+  // }, [sendRequest]);
   return (
     <>
-      {!loginStatus.profile && (
-        <Container code={loginStatus.code}>
+      {!loginProps?.loginStatus.profile && (
+        <Container code={loginProps?.loginStatus.code}>
           登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机
           <Button
             onClick={() => {
@@ -111,13 +115,13 @@ export default function Login() {
           </Button>
         </Container>
       )}
-      {loginStatus.profile && (
-        <Container code={loginStatus.code}>
+      {loginProps?.loginStatus.profile && (
+        <Container code={loginProps?.loginStatus.code}>
           <TopArea>
-            <Avatar src={loginStatus.profile.avatarUrl} />
+            <Avatar src={loginProps?.loginStatus.profile.avatarUrl} />
             <div style={{ marginLeft: "8px" }}>
               <TextArea>
-                <Nickname>{loginStatus.profile.nickname}</Nickname>
+                <Nickname>{loginProps?.loginStatus.profile.nickname}</Nickname>
                 <Vip
                   src={
                     "https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4357872257/9f40/483a/0341/78d106c94bf17f8f1e98a2f6748061c4.png"
