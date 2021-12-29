@@ -1,7 +1,8 @@
 import { StarFilled } from "@ant-design/icons";
 import { Col, Row, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { LoginContext } from "../../context/Context";
 import { getRecommendPlaylists } from "../../request/HomePage/RecommendPlaylists";
 
 const Container = styled.div`
@@ -86,6 +87,7 @@ const { Paragraph, Text } = Typography;
 export default function DailyRecommend() {
   const [visible, setVisible] = useState<boolean>(false);
   const [dailyPlaylists, setDailyPlaylists] = useState<any[]>([]);
+  const { loginStatus } = useContext(LoginContext);
   useEffect(() => {
     const sendRequest = async () => {
       const data = await getRecommendPlaylists();
@@ -96,8 +98,12 @@ export default function DailyRecommend() {
         setVisible(false);
       }
     };
-    sendRequest();
-  }, []);
+    if (loginStatus.profile) {
+      sendRequest();
+    } else {
+      setVisible(false);
+    }
+  }, [loginStatus.profile]);
   return (
     <>
       {visible && (
