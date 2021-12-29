@@ -4,11 +4,20 @@ import {
   PlayCircleOutlined,
   RightCircleOutlined,
 } from "@ant-design/icons";
-import { Affix, Slider } from "antd";
-import React, { useContext, useRef, useState } from "react";
+import {
+  Box,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+} from "@chakra-ui/react";
+import { Affix } from "antd";
+import React, { useCallback, useContext, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { MusicPlayContext } from "../../context/Context";
 import JumpController from "../../springs/JumpController";
+import { MdGraphicEq } from "react-icons/md";
 
 const Container = styled.div`
   background-color: #333333;
@@ -55,6 +64,7 @@ const ButtonArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 16px;
 `;
 
 export default function MusicController() {
@@ -62,26 +72,45 @@ export default function MusicController() {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
-  const [intervalId, setIntervalId] = useState<any>(0);
+  const intervalIdRef = useRef<any>(0);
   const controllerRef = useRef<HTMLAudioElement>();
-  const playMusic = (event: any) => {
+  const params = useLocation();
+  const playMusic = () => {
     let id = setInterval(() => {
       setCurrentTime(controllerRef.current?.currentTime || 0);
+      console.log(intervalIdRef.current);
     }, 500);
     setPlaying(true);
-    setIntervalId(id);
+    intervalIdRef.current = id;
     controllerRef.current?.play();
   };
-  const pauseMusic = (event: any) => {
-    console.log(intervalId);
-    clearInterval(intervalId);
+  const pauseMusic = () => {
+    clearInterval(intervalIdRef.current);
     controllerRef.current?.pause();
     setPlaying(false);
   };
+  const dragStart = (value: number) => {
+    console.log(intervalIdRef.current);
+    clearInterval(intervalIdRef.current);
+  };
+  const onDragging = useCallback((value) => {
+    setCurrentTime(value);
+  }, []);
+  const dragEnd = useCallback((value: number) => {
+    console.log("end");
+    setCurrentTime(value);
+    if (controllerRef.current) {
+      controllerRef.current.currentTime = value;
+    }
+    playMusic();
+  }, []);
   return (
     <Affix
       offsetBottom={0}
-      style={{ position: "sticky", bottom: 0 }}
+      style={{
+        position: params.pathname === "/" ? "sticky" : "absolute",
+        bottom: 0,
+      }}
     >
       <JumpController isShow={isShow}>
         <Container
@@ -113,12 +142,23 @@ export default function MusicController() {
               </Artist>
             </TextArea>
             <Slider
-              style={{ width: "40vw" }}
-              trackStyle={{ color: "red" }}
-              handleStyle={{ color: "red" }}
+              aria-label="slider-ex-4"
+              defaultValue={0}
               value={currentTime}
-              max={controllerRef.current?.duration}
-            />
+              max={controllerRef.current?.duration || 1}
+              width={"45vw"}
+              // onDragStart={dragStart}
+              onChangeStart={dragStart}
+              onChange={onDragging}
+              onChangeEnd={dragEnd}
+            >
+              <SliderTrack bg="red.100">
+                <SliderFilledTrack bg="tomato" />
+              </SliderTrack>
+              <SliderThumb boxSize={4}>
+                <Box color="tomato" as={MdGraphicEq} />
+              </SliderThumb>
+            </Slider>
             <ButtonArea>
               <LeftCircleOutlined
                 style={{ color: "white", fontSize: "25px" }}
