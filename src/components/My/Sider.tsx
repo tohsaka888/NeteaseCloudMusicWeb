@@ -1,21 +1,23 @@
 import { Layout, Menu, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useLoginStatus from "../../hooks/useLoginStatus";
+import { LoginContext } from "../../context/Context";
+// import useLoginStatus from "../../hooks/useLoginStatus";
 import { getUserPlaylist } from "../../request/my/Sider";
 import "../../styles/MyMusic.css";
 import SiderItem from "./SiderItem";
 
 export default function Sider() {
-  const loginStatus = useLoginStatus();
+  // const loginStatus = useLoginStatus();
+  const loginProps = useContext(LoginContext);
   const params = useParams();
   const [created, setCreated] = useState<any[]>([]);
   const [favour, setFavour] = useState<any[]>([]);
   const navigator = useNavigate();
   useEffect(() => {
     const sendRequest = async () => {
-      if (loginStatus.code === 200) {
-        const id = loginStatus.profile.userId || 0;
+      if (loginProps?.loginStatus.code === 200) {
+        const id = loginProps?.loginStatus.profile.userId || 0;
         if (id) {
           const data = await getUserPlaylist(id);
           if (data.code === 200) {
@@ -41,7 +43,12 @@ export default function Sider() {
       }
     };
     sendRequest();
-  }, [loginStatus, navigator, params.id]);
+  }, [
+    loginProps?.loginStatus.code,
+    loginProps?.loginStatus.profile.userId,
+    navigator,
+    params.id,
+  ]);
 
   return (
     <Layout.Sider
