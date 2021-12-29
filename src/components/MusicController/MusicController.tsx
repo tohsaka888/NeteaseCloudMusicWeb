@@ -12,12 +12,19 @@ import {
   SliderTrack,
 } from "@chakra-ui/react";
 import { Affix } from "antd";
-import React, { useCallback, useContext, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { MusicPlayContext } from "../../context/Context";
 import JumpController from "../../springs/JumpController";
 import { MdGraphicEq } from "react-icons/md";
+import moment from "moment";
 
 const Container = styled.div`
   background-color: #333333;
@@ -67,37 +74,58 @@ const ButtonArea = styled.div`
   margin-left: 16px;
 `;
 
+const TimeArea = styled.div`
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-left: 16px;
+`;
+
 export default function MusicController() {
   const props = useContext(MusicPlayContext);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const [playStatus, setPlayStatus] = useState<boolean>(false);
   const intervalIdRef = useRef<any>(0);
   const controllerRef = useRef<HTMLAudioElement>();
   const params = useLocation();
   const playMusic = () => {
-    let id = setInterval(() => {
-      setCurrentTime(controllerRef.current?.currentTime || 0);
-      console.log(intervalIdRef.current);
-    }, 500);
-    setPlaying(true);
-    intervalIdRef.current = id;
+    setPlayStatus(true);
     controllerRef.current?.play();
   };
+  useEffect(() => {
+    switch (playStatus) {
+      case false:
+        if (intervalIdRef.current) {
+          clearInterval(intervalIdRef.current);
+          // console.log("pause");
+        }
+        break;
+      case true:
+        let id = setInterval(() => {
+          setCurrentTime(controllerRef.current?.currentTime || 0);
+        }, 500);
+        setPlaying(true);
+        intervalIdRef.current = id;
+        // console.log("play");
+        break;
+    }
+  }, [playStatus]);
   const pauseMusic = () => {
-    clearInterval(intervalIdRef.current);
+    setPlayStatus(false);
     controllerRef.current?.pause();
     setPlaying(false);
   };
   const dragStart = (value: number) => {
-    console.log(intervalIdRef.current);
-    clearInterval(intervalIdRef.current);
+    setPlayStatus(false);
   };
   const onDragging = useCallback((value) => {
     setCurrentTime(value);
   }, []);
   const dragEnd = useCallback((value: number) => {
-    console.log("end");
     setCurrentTime(value);
     if (controllerRef.current) {
       controllerRef.current.currentTime = value;
@@ -159,6 +187,14 @@ export default function MusicController() {
                 <Box color="tomato" as={MdGraphicEq} />
               </SliderThumb>
             </Slider>
+            <TimeArea>
+              {moment(currentTime * 1000).format("mm:ss")}/
+              {moment(
+                (controllerRef.current &&
+                  controllerRef.current.duration * 1000) ||
+                  0
+              ).format("mm:ss")}
+            </TimeArea>
             <ButtonArea>
               <LeftCircleOutlined
                 style={{ color: "white", fontSize: "25px" }}
