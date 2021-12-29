@@ -5,12 +5,15 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Layout } from "antd";
+import { ChakraProvider } from "@chakra-ui/react";
 
 ReactDOM.render(
   <Router>
-    <Layout>
-      <App />
-    </Layout>
+    <ChakraProvider>
+      <Layout>
+        <App />
+      </Layout>
+    </ChakraProvider>
   </Router>,
   document.getElementById("root")
 );
