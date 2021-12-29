@@ -15,7 +15,7 @@ export default function JumpController({ children, isShow = false }: Props) {
     to: {
       height: isShow ? "60px" : "10px",
     },
-    config: config.gentle,
+    config: config.wobbly,
   });
   return <animated.div style={props}>{children}</animated.div>;
 }
