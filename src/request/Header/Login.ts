@@ -73,12 +73,28 @@ const checkQRStatus = async (key: string) => {
  * @date 2021-12-28
  * @returns {any}
  */
-const getLoginStatus = async () => {
+const  getLoginStatus = async () => {
   try {
     const res = await fetch(`${BaseUrl}/login/status`, {
       method: "POST",
       headers: httpHeader,
       credentials: "include",
+    });
+    const data = await res.json();
+    localStorage.setItem("loginStatus", JSON.stringify(data));
+    return data;
+  } catch (error) {
+    return networkError;
+  }
+};
+
+const mobileLogin = async (phone: string, password: string) => {
+  try {
+    const res = await fetch(`${BaseUrl}/login/cellphone`, {
+      method: "POST",
+      body: JSON.stringify({ phone: phone, password: password }),
+      credentials: "include",
+      headers: httpHeader,
     });
     const data = await res.json();
     return data;
@@ -87,4 +103,10 @@ const getLoginStatus = async () => {
   }
 };
 
-export { createQRCode, createQRKey, checkQRStatus, getLoginStatus };
+export {
+  createQRCode,
+  createQRKey,
+  checkQRStatus,
+  getLoginStatus,
+  mobileLogin,
+};
