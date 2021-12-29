@@ -1,18 +1,20 @@
-import { Avatar, Button, message, Modal } from "antd";
+import { Avatar, Button, message, Modal, Popover } from "antd";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Draggable, {
   DraggableBounds,
   DraggableEventHandler,
 } from "react-draggable";
 import styled from "styled-components";
-import { VisibleContext } from "../../context/Context";
-import useLoginStatus from "../../hooks/useLoginStatus";
+import { LoginContext, VisibleContext } from "../../context/Context";
 import {
   checkQRStatus,
   createQRCode,
   createQRKey,
+  getLoginStatus,
 } from "../../request/Header/Login";
 import "../../styles/Header.css";
+import MobileLogin from "./MobileLogin";
+import PopoverContent from "./PopoverContent";
 
 const Title = styled.div`
   text-align: left;
@@ -91,11 +93,13 @@ const LoginContainer = styled.div`
 
 export default function Login() {
   const props = useContext(VisibleContext);
+  const { loginStatus, setLoginStatus } = useContext(LoginContext);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [qrUrl, setQrUrl] = useState<string>("");
   // const [qrStatus, setQrStatus] = useState<any>();
   // const qrStatusRef = useRef<any>();
   // const [id, setId] = useState<any>();
+  const [loginMethod, setLoginMethod] = useState<number>(0);
   const [bounds, setBounds] = useState<DraggableBounds>({
     left: 0,
     top: 0,
@@ -103,7 +107,14 @@ export default function Login() {
     right: 0,
   });
   const draggleRef = useRef<HTMLDivElement>();
-  const loginStatus = useLoginStatus();
+  // const isLogin = useLoginStatus();
+  useEffect(() => {
+    const sendRequest = async () => {
+      const data = await getLoginStatus();
+      setLoginStatus(data.data);
+    };
+    sendRequest();
+  }, [setLoginStatus]);
   const onStart: DraggableEventHandler = (event, uiData) => {
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = draggleRef.current?.getBoundingClientRect();
@@ -124,30 +135,38 @@ export default function Login() {
     props?.setVisible(false);
   };
   useEffect(() => {
-    let id: NodeJS.Timeout;
+    let id: NodeJS.Timeout | null = null;
     const callback = async (key: string) => {
       const data = await checkQRStatus(key);
       if (data.code === 800 || data.code === 803) {
-        clearInterval(id);
+        if (id) {
+          clearInterval(id);
+        }
         if (data.code === 803) {
           message.success("登录成功");
         }
         props?.setVisible(false);
       }
     };
+    let key: string;
     const sendRequest = async () => {
-      const key: string = await createQRKey();
+      key = await createQRKey();
       if (key && props?.visible) {
         const data = await createQRCode(key);
         setQrUrl(data);
-        id = setInterval(() => {
-          callback(key);
-        }, 3000);
       }
     };
     if (props?.visible) {
       sendRequest();
+      id = setInterval(() => {
+        callback(key);
+      }, 3000);
     }
+    return () => {
+      if (id) {
+        clearInterval(id);
+      }
+    };
   }, [props, props?.visible]);
   return (
     <>
@@ -164,10 +183,12 @@ export default function Login() {
         </Button>
       )}
       {loginStatus.profile && (
-        <Avatar
-          style={{ marginLeft: "16px" }}
-          src={loginStatus.profile.avatarUrl}
-        />
+        <Popover placement="bottom" content={PopoverContent}>
+          <Avatar
+            style={{ marginLeft: "16px" }}
+            src={loginStatus.profile.avatarUrl}
+          />
+        </Popover>
       )}
       <Modal
         visible={props?.visible}
@@ -204,17 +225,28 @@ export default function Login() {
           </Draggable>
         )}
       >
-        <LoginContainer>
-          <LoginImage />
-          <QRCodeArea>
-            <QRCodeTitle>扫码登录</QRCodeTitle>
-            <QrCode src={qrUrl} alt="qrUrl" />
-            <QrInfo>
-              使用 <QrLink>网易云音乐APP</QrLink> 扫码登录
-            </QrInfo>
-          </QRCodeArea>
-        </LoginContainer>
-        <AnotherLogin>选择其他方式登录</AnotherLogin>
+        {loginMethod === 0 && (
+          <>
+            <LoginContainer>
+              <LoginImage />
+              <QRCodeArea>
+                <QRCodeTitle>扫码登录</QRCodeTitle>
+                <QrCode src={qrUrl} alt="qrUrl" />
+                <QrInfo>
+                  使用 <QrLink>网易云音乐APP</QrLink> 扫码登录
+                </QrInfo>
+              </QRCodeArea>
+            </LoginContainer>
+            <AnotherLogin
+              onClick={() => {
+                setLoginMethod(1);
+              }}
+            >
+              选择其他方式登录
+            </AnotherLogin>
+          </>
+        )}
+        {loginMethod === 1 && <MobileLogin setLoginMethod={setLoginMethod} />}
       </Modal>
     </>
   );

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import MusicController from "./components/MusicController/MusicController";
-import { MusicPlayContext, VisibleContext } from "./context/Context";
+import {
+  LoginContext,
+  MusicPlayContext,
+  VisibleContext,
+} from "./context/Context";
 import Album from "./pages/Album";
 import Artist from "./pages/Artist";
 import DjRadio from "./pages/DjRadio";
@@ -20,6 +24,8 @@ function App() {
   const [visible, setVisible] = useState<boolean>(false);
   const [record, setRecord] = useState<any>({});
   const [musicUrl, setMusicUrl] = useState<string>("");
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [loginStatus, setLoginStatus] = useState<any>({ profile: null });
   return (
     <VisibleContext.Provider
       value={{ visible: visible, setVisible: setVisible }}
@@ -32,24 +38,33 @@ function App() {
           setMusicUrl: setMusicUrl,
         }}
       >
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="discover" element={<HomePage />} />
-          <Route path="my" element={<MyMusic />}>
-            <Route path=":id" element={<PlaylistDetail />} />
-          </Route>
-          <Route path="friend" element={<Friend />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="musician" element={<Musician />} />
-          <Route path="download" element={<Download />} />
-          <Route path="discover/toplist" element={<Toplist />} />
-          <Route path="discover/playlist" element={<Playlist />} />
-          <Route path="discover/djradio" element={<DjRadio />} />
-          <Route path="discover/artist" element={<Artist />} />
-          <Route path="discover/album" element={<Album />} />
-        </Routes>
-        <MusicController />
+        <LoginContext.Provider
+          value={{
+            isLogin: isLogin,
+            setIsLogin: setIsLogin,
+            loginStatus: loginStatus,
+            setLoginStatus: setLoginStatus,
+          }}
+        >
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="discover" element={<HomePage />} />
+            <Route path="my" element={<MyMusic />}>
+              <Route path=":id" element={<PlaylistDetail />} />
+            </Route>
+            <Route path="friend" element={<Friend />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="musician" element={<Musician />} />
+            <Route path="download" element={<Download />} />
+            <Route path="discover/toplist" element={<Toplist />} />
+            <Route path="discover/playlist" element={<Playlist />} />
+            <Route path="discover/djradio" element={<DjRadio />} />
+            <Route path="discover/artist" element={<Artist />} />
+            <Route path="discover/album" element={<Album />} />
+          </Routes>
+          <MusicController />
+        </LoginContext.Provider>
       </MusicPlayContext.Provider>
     </VisibleContext.Provider>
   );
