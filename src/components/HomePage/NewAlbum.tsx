@@ -80,12 +80,11 @@ export default function NewAlbum() {
         </Front>
       </Title>
       <Container>
-        <Carousel dots={false} autoplay>
+        <Carousel dots={false}>
           {albums.map((album, index) => {
             return (
               <Area key={index} className="album">
                 {album.map((item: any, i: number) => {
-                  console.log(item);
                   return (
                     <Album key={i}>
                       <Mask
