@@ -17,16 +17,16 @@ export default function Sider() {
   useEffect(() => {
     const sendRequest = async () => {
       if (loginProps?.loginStatus.code === 200) {
-        const id = loginProps?.loginStatus.profile.userId || 0;
-        if (id) {
-          const data = await getUserPlaylist(id);
+        const profile = loginProps?.loginStatus.profile|| 0;
+        if (profile) {
+          const data = await getUserPlaylist(profile.userId);
           if (data.code === 200) {
             let playlist = data.playlist;
             let userPlaylists: any[] = [];
             let favourPlaylists: any[] = [];
             if (playlist.length) {
               playlist.forEach((item: any) => {
-                if (item.userId === id) {
+                if (item.userId === profile.userId) {
                   userPlaylists.push(item);
                 } else {
                   favourPlaylists.push(item);
@@ -43,12 +43,7 @@ export default function Sider() {
       }
     };
     sendRequest();
-  }, [
-    loginProps?.loginStatus.code,
-    loginProps?.loginStatus.profile.userId,
-    navigator,
-    params.id,
-  ]);
+  }, [loginProps?.loginStatus.code, loginProps?.loginStatus.profile, navigator, params.id]);
 
   return (
     <Layout.Sider
