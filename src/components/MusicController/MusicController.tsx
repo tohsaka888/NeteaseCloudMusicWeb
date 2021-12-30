@@ -100,7 +100,6 @@ export default function MusicController() {
     setCurrentTime(props?.controllerRef.current?.currentTime || 0);
   }, [props?.controllerRef, setCurrentTime]);
   useEffect(() => {
-    console.log(111);
     switch (playStatus) {
       case false:
         if (intervalIdRef.current) {
@@ -126,9 +125,12 @@ export default function MusicController() {
   const dragStart = (value: number) => {
     setPlayStatus(false);
   };
-  const onDragging = useCallback((value) => {
-    setCurrentTime(value);
-  }, [setCurrentTime]);
+  const onDragging = useCallback(
+    (value) => {
+      setCurrentTime(value);
+    },
+    [setCurrentTime]
+  );
   const dragEnd = useCallback(
     (value: number) => {
       setCurrentTime(value);
