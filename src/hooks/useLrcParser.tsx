@@ -84,7 +84,6 @@ export default function useLrcParser(data: any): Lyrics[] | null {
   }, [data, musicProps?.controllerRef]);
   useEffect(() => {
     getLrc();
-    console.log(1111);
   }, [getLrc]);
   return lyrics;
 }
