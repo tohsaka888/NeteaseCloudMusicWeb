@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import CommentList from "../CommentList/CommentList";
 import Lyric from "./Lyric";
 import MusicInfo from "./MusicInfo";
 
@@ -13,6 +14,7 @@ export default function LeftPart() {
     <Container>
       <MusicInfo />
       <Lyric />
+      <CommentList />
     </Container>
   );
 }
