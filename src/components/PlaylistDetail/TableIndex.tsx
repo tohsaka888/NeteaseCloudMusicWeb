@@ -1,5 +1,5 @@
 import { PlayCircleOutlined } from "@ant-design/icons";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { MusicPlayContext } from "../../context/Context";
 import usePlayMusic from "../../hooks/usePlayMusic";
@@ -19,12 +19,19 @@ type Props = {
 
 export default function TableIndex({ record, value, index }: Props) {
   const props = useContext(MusicPlayContext);
+  const [color, setColor] = useState<string>("#333333");
   const playMusic = usePlayMusic();
   return (
     <Index>
       <div style={{ color: "#333333" }}>{index + 1}</div>
       <PlayCircleOutlined
-        color="#333333"
+        style={{ color: color }}
+        onMouseOver={() => {
+          setColor("red");
+        }}
+        onMouseLeave={() => {
+          setColor("#333333");
+        }}
         onClick={() => {
           playMusic(record.id);
           props?.setRecord(record);
