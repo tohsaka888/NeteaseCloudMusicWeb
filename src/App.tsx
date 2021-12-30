@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import styled from "styled-components";
+import React, { useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import MusicController from "./components/MusicController/MusicController";
 import {
+  CurrentTimeContext,
   LoginContext,
   MusicPlayContext,
   VisibleContext,
@@ -19,6 +21,11 @@ import Playlist from "./pages/Playlist";
 import PlaylistDetail from "./pages/PlaylistDetail";
 import Shop from "./pages/Shop";
 import Toplist from "./pages/Toplist";
+import SongDetail from "./pages/SongDetail";
+
+const PlaylistContainer = styled.div`
+  padding: 0px 18vw;
+`;
 
 function App() {
   const [visible, setVisible] = useState<boolean>(false);
@@ -26,6 +33,8 @@ function App() {
   const [musicUrl, setMusicUrl] = useState<string>("");
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [loginStatus, setLoginStatus] = useState<any>({ profile: null });
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const controllerRef = useRef<HTMLAudioElement>();
   return (
     <VisibleContext.Provider
       value={{ visible: visible, setVisible: setVisible }}
@@ -36,6 +45,7 @@ function App() {
           setRecord: setRecord,
           musicUrl: musicUrl,
           setMusicUrl: setMusicUrl,
+          controllerRef: controllerRef,
         }}
       >
         <LoginContext.Provider
@@ -46,24 +56,37 @@ function App() {
             setLoginStatus: setLoginStatus,
           }}
         >
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="discover" element={<HomePage />} />
-            <Route path="my" element={<MyMusic />}>
-              <Route path=":id" element={<PlaylistDetail />} />
-            </Route>
-            <Route path="friend" element={<Friend />} />
-            <Route path="shop" element={<Shop />} />
-            <Route path="musician" element={<Musician />} />
-            <Route path="download" element={<Download />} />
-            <Route path="discover/toplist" element={<Toplist />} />
-            <Route path="discover/playlist" element={<Playlist />} />
-            <Route path="discover/djradio" element={<DjRadio />} />
-            <Route path="discover/artist" element={<Artist />} />
-            <Route path="discover/album" element={<Album />} />
-          </Routes>
-          <MusicController />
+          <CurrentTimeContext.Provider
+            value={{ currentTime: currentTime, setCurrentTime: setCurrentTime }}
+          >
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="discover" element={<HomePage />} />
+              <Route path="my" element={<MyMusic />}>
+                <Route path=":id" element={<PlaylistDetail />} />
+              </Route>
+              <Route path="friend" element={<Friend />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="musician" element={<Musician />} />
+              <Route path="download" element={<Download />} />
+              <Route path="discover/toplist" element={<Toplist />} />
+              <Route path="discover/playlist" element={<Playlist />} />
+              <Route path="discover/djradio" element={<DjRadio />} />
+              <Route path="discover/artist" element={<Artist />} />
+              <Route path="discover/album" element={<Album />} />
+              <Route
+                path="playlist/:id"
+                element={
+                  <PlaylistContainer>
+                    <PlaylistDetail />
+                  </PlaylistContainer>
+                }
+              />
+              <Route path="song/:id" element={<SongDetail />} />
+            </Routes>
+            <MusicController />
+          </CurrentTimeContext.Provider>
         </LoginContext.Provider>
       </MusicPlayContext.Provider>
     </VisibleContext.Provider>
