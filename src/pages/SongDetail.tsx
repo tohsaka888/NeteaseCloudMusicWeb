@@ -34,7 +34,7 @@ export default function SongDetail() {
             <RightPart />
           </>
         ) : (
-          <LoadingArea height="80vh" />
+          <LoadingArea height="84vh" />
         )}
       </SongContext.Provider>
     </Container>
