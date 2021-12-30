@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, MutableRefObject } from "react";
 
 type VisibleProps = {
   visible: boolean;
@@ -10,6 +10,12 @@ type MusicPlayProps = {
   musicUrl: string;
   setRecord: Function;
   setMusicUrl: Function;
+  controllerRef: MutableRefObject<HTMLAudioElement | undefined>;
+};
+
+type CurrentTimeProps = {
+  currentTime: number;
+  setCurrentTime: Function;
 };
 
 type LoginProps = {
@@ -30,4 +36,9 @@ const LoginContext = createContext<LoginProps>({
   setLoginStatus: () => {},
 });
 
-export { VisibleContext, MusicPlayContext, LoginContext };
+const CurrentTimeContext = createContext<CurrentTimeProps>({
+  currentTime: 0,
+  setCurrentTime: () => {},
+});
+
+export { VisibleContext, MusicPlayContext, LoginContext, CurrentTimeContext };
