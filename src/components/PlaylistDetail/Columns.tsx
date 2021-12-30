@@ -2,6 +2,7 @@
 import { ColumnsType } from "antd/lib/table";
 import moment from "moment";
 import styled from "styled-components";
+import MuiscName from "./MuiscName";
 // import usePlayMusic from "../../hooks/usePlayMusic";
 import TableIndex from "./TableIndex";
 
@@ -35,6 +36,9 @@ export const columns: ColumnsType<any> = [
     key: "name",
     width: "40%",
     ellipsis: true,
+    render: (value, record, index) => (
+      <MuiscName value={value} record={record} index={index} />
+    ),
   },
   {
     title: "时长",
