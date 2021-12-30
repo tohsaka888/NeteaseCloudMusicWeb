@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getTopArtists } from "../../request/HomePage/Artists";
+import LoadingArea from "./LoadingArea";
 
 const Container = styled.div`
   display: flex;
@@ -75,6 +76,7 @@ export default function TopArtists() {
             </Item>
           );
         })}
+        {artists.length === 0 && <LoadingArea height="20vh" />}
       </Container>
     </>
   );

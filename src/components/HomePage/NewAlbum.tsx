@@ -1,9 +1,11 @@
 import { StarFilled } from "@ant-design/icons";
 import { Carousel, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getNewAlbum } from "../../request/HomePage/newAlbum";
 import "../../styles/HomePage.css";
+import LoadingArea from "./LoadingArea";
 
 const Container = styled.div`
   padding: 0px 18px;
@@ -31,6 +33,7 @@ const CoverImage = styled.img`
   width: 100px;
   height: 100px;
   position: relative;
+  cursor: pointer;
 `;
 
 const Mask = styled.div`
@@ -39,6 +42,7 @@ const Mask = styled.div`
   background-position: -1px -570px;
   width: 118px;
   height: 100px;
+  cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -57,6 +61,7 @@ const Front = styled.div`
 
 export default function NewAlbum() {
   const [albums, setAlbums] = useState<any[]>([]);
+  const navigator = useNavigate();
   useEffect(() => {
     const sendRequest = async () => {
       const data = await getNewAlbum();
@@ -80,10 +85,20 @@ export default function NewAlbum() {
             return (
               <Area key={index} className="album">
                 {album.map((item: any, i: number) => {
+                  console.log(item);
                   return (
                     <Album key={i}>
-                      <Mask />
-                      <CoverImage src={item.picUrl} />
+                      <Mask
+                        onClick={() => {
+                          navigator(`/playlist/${item.id}`);
+                        }}
+                      />
+                      <CoverImage
+                        src={item.picUrl}
+                        onClick={() => {
+                          navigator(`/playlist/${item.id}`);
+                        }}
+                      />
                       <Typography style={{ lineHeight: 1, marginTop: "8px" }}>
                         <Typography.Paragraph
                           ellipsis={{ rows: 1 }}
@@ -114,6 +129,7 @@ export default function NewAlbum() {
             );
           })}
         </Carousel>
+        {albums.length === 0 && <LoadingArea height={"23vh"} />}
       </Container>
     </>
   );
