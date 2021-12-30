@@ -21,7 +21,7 @@ import React, {
 } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { MusicPlayContext } from "../../context/Context";
+import { CurrentTimeContext, MusicPlayContext } from "../../context/Context";
 import JumpController from "../../springs/JumpController";
 import { MdGraphicEq } from "react-icons/md";
 import moment from "moment";
@@ -87,16 +87,20 @@ export default function MusicController() {
   const props = useContext(MusicPlayContext);
   const [isShow, setIsShow] = useState<boolean>(false);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
+  // const [currentTime, setCurrentTime] = useState<number>(0);
   const [playStatus, setPlayStatus] = useState<boolean>(false);
+  const { currentTime, setCurrentTime } = useContext(CurrentTimeContext);
   const intervalIdRef = useRef<any>(0);
-  const controllerRef = useRef<HTMLAudioElement>();
   const params = useLocation();
-  const playMusic = () => {
+  const playMusic = useCallback(() => {
     setPlayStatus(true);
-    controllerRef.current?.play();
-  };
+    props?.controllerRef.current?.play();
+  }, [props?.controllerRef]);
+  const callback = useCallback(() => {
+    setCurrentTime(props?.controllerRef.current?.currentTime || 0);
+  }, [props?.controllerRef, setCurrentTime]);
   useEffect(() => {
+    console.log(111);
     switch (playStatus) {
       case false:
         if (intervalIdRef.current) {
@@ -106,17 +110,17 @@ export default function MusicController() {
         break;
       case true:
         let id = setInterval(() => {
-          setCurrentTime(controllerRef.current?.currentTime || 0);
+          callback();
         }, 500);
         setPlaying(true);
         intervalIdRef.current = id;
         // console.log("play");
         break;
     }
-  }, [playStatus]);
+  }, [callback, playStatus, props?.controllerRef, setCurrentTime]);
   const pauseMusic = () => {
     setPlayStatus(false);
-    controllerRef.current?.pause();
+    props?.controllerRef.current?.pause();
     setPlaying(false);
   };
   const dragStart = (value: number) => {
@@ -124,19 +128,27 @@ export default function MusicController() {
   };
   const onDragging = useCallback((value) => {
     setCurrentTime(value);
-  }, []);
-  const dragEnd = useCallback((value: number) => {
-    setCurrentTime(value);
-    if (controllerRef.current) {
-      controllerRef.current.currentTime = value;
-    }
-    playMusic();
-  }, []);
+  }, [setCurrentTime]);
+  const dragEnd = useCallback(
+    (value: number) => {
+      setCurrentTime(value);
+      if (props?.controllerRef.current) {
+        props.controllerRef.current.currentTime = value;
+      }
+      playMusic();
+    },
+    [playMusic, props?.controllerRef, setCurrentTime]
+  );
   return (
     <Affix
       offsetBottom={0}
       style={{
-        position: params.pathname === "/" ? "sticky" : "absolute",
+        position:
+          params.pathname === "/" ||
+          params.pathname.includes("/playlist") ||
+          params.pathname.includes("/song")
+            ? "sticky"
+            : "absolute",
         bottom: 0,
       }}
     >
@@ -173,7 +185,7 @@ export default function MusicController() {
               aria-label="slider-ex-4"
               defaultValue={0}
               value={currentTime}
-              max={controllerRef.current?.duration || 1}
+              max={props?.controllerRef.current?.duration || 1}
               width={"45vw"}
               // onDragStart={dragStart}
               onChangeStart={dragStart}
@@ -190,8 +202,8 @@ export default function MusicController() {
             <TimeArea>
               {moment(currentTime * 1000).format("mm:ss")}/
               {moment(
-                (controllerRef.current &&
-                  controllerRef.current.duration * 1000) ||
+                (props?.controllerRef.current &&
+                  props?.controllerRef.current.duration * 1000) ||
                   0
               ).format("mm:ss")}
             </TimeArea>
@@ -231,8 +243,8 @@ export default function MusicController() {
             onCanPlay={playMusic}
             onPause={pauseMusic}
             ref={(refs) => {
-              if (refs) {
-                controllerRef.current = refs;
+              if (refs && props?.controllerRef) {
+                props.controllerRef.current = refs;
               }
             }}
           />
