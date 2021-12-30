@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BannerContext } from "../../context/HomePage/Context";
 import { sendRequest } from "../../request/HomePage/Banner";
+import LoadingArea from "./LoadingArea";
 import SwitchButton from "./SwitchButton";
 
 type ContainerProps = {
@@ -38,7 +39,7 @@ const Download = styled.div`
   position: absolute;
   background-image: url("https://s2.music.126.net/style/web2/img/index/download.png?b6cf2647cb3dbaedebebeb422d2f0268");
   float: right;
-  z-index: 1000;
+  z-index: 10;
   left: 66vw;
   cursor: pointer;
   background-size: cover;
@@ -63,26 +64,38 @@ export default function Banner() {
       <Download />
       <SwitchButton direction="left" />
       <SwitchButton direction="right" />
-      <Carousel
-        ref={(refs) => {
-          if (refs) {
-            bannerRef.current = refs;
-          }
-        }}
-        dots={{ className: "dots" }}
-        autoplay
-        effect="fade"
-      >
-        {banners.map((item, index) => {
-          return (
-            <Container key={index} currentUrl={item.imageUrl}>
-              <ImageArea>
-                <BannerImage src={item.imageUrl} />
-              </ImageArea>
-            </Container>
-          );
-        })}
-      </Carousel>
+      {banners.length !== 0 ? (
+        <Carousel
+          ref={(refs) => {
+            if (refs) {
+              bannerRef.current = refs;
+            }
+          }}
+          dots={{ className: "dots" }}
+          autoplay
+          effect="fade"
+        >
+          {banners.map((item, index) => {
+            return (
+              <Container key={index} currentUrl={item.imageUrl}>
+                <ImageArea>
+                  <BannerImage src={item.imageUrl} />
+                </ImageArea>
+              </Container>
+            );
+          })}
+        </Carousel>
+      ) : (
+        <LoadingArea
+          height="273px"
+          width="48vw"
+          style={{
+            backgroundColor: "white",
+            marginLeft: "18vw",
+            marginRight: "18vw",
+          }}
+        />
+      )}
     </BannerContext.Provider>
   );
 }

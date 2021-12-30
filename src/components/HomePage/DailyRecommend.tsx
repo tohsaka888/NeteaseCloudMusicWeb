@@ -1,6 +1,7 @@
 import { StarFilled } from "@ant-design/icons";
 import { Col, Row, Typography } from "antd";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginContext } from "../../context/Context";
 import { getRecommendPlaylists } from "../../request/HomePage/RecommendPlaylists";
@@ -27,6 +28,7 @@ const Mask = styled.div`
   height: 140px;
   top: 16px;
   bottom: 0px;
+  cursor: pointer;
 `;
 
 const PlaylistBottom = styled.div`
@@ -88,6 +90,7 @@ export default function DailyRecommend() {
   const [visible, setVisible] = useState<boolean>(false);
   const [dailyPlaylists, setDailyPlaylists] = useState<any[]>([]);
   const { loginStatus } = useContext(LoginContext);
+  const navigator = useNavigate();
   useEffect(() => {
     const sendRequest = async () => {
       const data = await getRecommendPlaylists();
@@ -121,7 +124,11 @@ export default function DailyRecommend() {
                   <Col span={6} key={index}>
                     <Container>
                       <CoverImage src={item.picUrl} />
-                      <Mask>
+                      <Mask
+                        onClick={() => {
+                          navigator(`/playlist/${item.id}`);
+                        }}
+                      >
                         <PlaylistBottom />
                         <BottomIcon />
                         <PlayCount>{item.playcount}</PlayCount>

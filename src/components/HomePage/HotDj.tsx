@@ -2,6 +2,7 @@ import { Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getHotDj } from "../../request/HomePage/HotDj";
+import LoadingArea from "./LoadingArea";
 
 const Container = styled.div`
   background-color: transparent;
@@ -77,6 +78,7 @@ export default function HotDj() {
           </Item>
         );
       })}
+      {hotDj.length === 0 && <LoadingArea height="25vh" />}
     </Container>
   );
 }

@@ -1,9 +1,11 @@
 import { ArrowRightOutlined, StarFilled } from "@ant-design/icons";
 import { Col, message, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { sendRequest } from "../../request/HomePage/HotPlaylists";
 import "../../styles/HomePage.css";
+import LoadingArea from "./LoadingArea";
 
 const Container = styled.div`
   display: flex;
@@ -17,6 +19,7 @@ const CoverImage = styled.img`
   width: 140px;
   height: 140px;
   position: relative;
+  cursor: pointer;
 `;
 
 const Mask = styled.div`
@@ -25,7 +28,8 @@ const Mask = styled.div`
   background-position: 0 0;
   width: 140px;
   height: 140px;
-  bottom: 58px;
+  bottom: 56px;
+  cursor: pointer;
 `;
 
 const PlaylistBottom = styled.div`
@@ -117,6 +121,7 @@ const { Paragraph } = Typography;
 
 export default function HotPlaylists() {
   const [hotplaylists, setHotPlaylists] = useState<any[]>([]);
+  const navigator = useNavigate();
   useEffect(() => {
     const getHotPlaylists = async () => {
       const data = await sendRequest();
@@ -159,13 +164,17 @@ export default function HotPlaylists() {
         </More>
       </Title>
       <Row justify="space-around">
-        {hotplaylists.length !== 0 &&
+        {hotplaylists.length !== 0 ? (
           hotplaylists.map((item, index) => {
             return (
               <Col span={6} key={index}>
                 <Container>
                   <CoverImage src={item.coverImgUrl} />
-                  <Mask>
+                  <Mask
+                    onClick={() => {
+                      navigator(`/playlist/${item.id}`);
+                    }}
+                  >
                     <PlaylistBottom />
                     <BottomIcon />
                     <PlayCount>{item.playCount}</PlayCount>
@@ -177,7 +186,10 @@ export default function HotPlaylists() {
                 </Container>
               </Col>
             );
-          })}
+          })
+        ) : (
+          <LoadingArea height="30vh" />
+        )}
       </Row>
     </>
   );
