@@ -2,7 +2,6 @@
   "name": "netease-cloud-music-web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tohsaka888.github.io/netease-cloud-music-web",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@chakra-ui/react": "^1.7.3",
