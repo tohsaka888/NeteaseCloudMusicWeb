@@ -38,6 +38,7 @@ const Item = styled.div<ItemProps>`
   padding: 0px 16px;
   height: 80%;
   margin: 10% 8px;
+  min-width: fit-content;
   background-color: ${({ selectedKey, name }) =>
     selectedKey === name ? "#9B0909" : "transparent"};
   border-radius: 16px;

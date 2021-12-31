@@ -21,6 +21,7 @@
   border-radius: 32px !important;
   width: 158px !important;
   margin-left: 50px;
+  min-width: 158px !important;
 }
 
 .login {

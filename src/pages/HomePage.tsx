@@ -13,6 +13,7 @@ const Container = styled.div`
   display: flex;
   background-color: white;
   box-sizing: border-box;
+  min-width: 900px;
 `;
 
 export default function HomePage() {
@@ -32,7 +33,7 @@ export default function HomePage() {
     // console.log(sessionStorage.getItem("userData"));
   }, [userData]);
   return (
-    <Content className="content">
+    <Content className="content" style={{ minWidth: "1300px" }}>
       <Banner />
       <Container>
         <MainContent />

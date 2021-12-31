@@ -26,6 +26,8 @@ const Container = styled.div<ContainerProps>`
 
 const ImageArea = styled.div`
   width: 48vw;
+  min-width: 600px;
+  position: relative;
 `;
 
 const BannerImage = styled.img`
@@ -43,6 +45,8 @@ const Download = styled.div`
   left: 66vw;
   cursor: pointer;
   background-size: cover;
+  min-width: 200px;
+  overflow: hidden;
 `;
 
 export default function Banner() {
