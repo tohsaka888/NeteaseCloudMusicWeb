@@ -2,6 +2,7 @@ import { Spin } from "antd";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import CommentList from "../components/CommentList/CommentList";
 import MusicList from "../components/PlaylistDetail/MusicList";
 import PlaylistInfo from "../components/PlaylistDetail/PlaylistInfo";
 import useHttpRequest from "../hooks/useHttpRequest";
@@ -47,6 +48,7 @@ export default function PlaylistDetail() {
         <>
           <PlaylistInfo info={data.playlist} />
           <MusicList info={data.playlist} />
+          <CommentList />
         </>
       )}
     </Container>
