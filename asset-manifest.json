@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/netease-cloud-music-web/static/css/main.19b5cd45.chunk.css",
+    "main.js": "/netease-cloud-music-web/static/js/main.dd221351.chunk.js",
+    "main.js.map": "/netease-cloud-music-web/static/js/main.dd221351.chunk.js.map",
+    "runtime-main.js": "/netease-cloud-music-web/static/js/runtime-main.81b5b80d.js",
+    "runtime-main.js.map": "/netease-cloud-music-web/static/js/runtime-main.81b5b80d.js.map",
+    "static/css/2.2b8316e7.chunk.css": "/netease-cloud-music-web/static/css/2.2b8316e7.chunk.css",
+    "static/js/2.a615cecc.chunk.js": "/netease-cloud-music-web/static/js/2.a615cecc.chunk.js",
+    "static/js/2.a615cecc.chunk.js.map": "/netease-cloud-music-web/static/js/2.a615cecc.chunk.js.map",
+    "static/js/3.d222714a.chunk.js": "/netease-cloud-music-web/static/js/3.d222714a.chunk.js",
+    "static/js/3.d222714a.chunk.js.map": "/netease-cloud-music-web/static/js/3.d222714a.chunk.js.map",
+    "index.html": "/netease-cloud-music-web/index.html",
+    "static/css/2.2b8316e7.chunk.css.map": "/netease-cloud-music-web/static/css/2.2b8316e7.chunk.css.map",
+    "static/css/main.19b5cd45.chunk.css.map": "/netease-cloud-music-web/static/css/main.19b5cd45.chunk.css.map",
+    "static/js/2.a615cecc.chunk.js.LICENSE.txt": "/netease-cloud-music-web/static/js/2.a615cecc.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.81b5b80d.js",
+    "static/css/2.2b8316e7.chunk.css",
+    "static/js/2.a615cecc.chunk.js",
+    "static/css/main.19b5cd45.chunk.css",
+    "static/js/main.dd221351.chunk.js"
+  ]
+}
