@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 const Total = styled.div`
