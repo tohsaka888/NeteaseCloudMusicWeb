@@ -11,7 +11,6 @@ const Container = styled.div`
   margin: 0 18vw;
   border-left: 1px solid #999999;
   border-right: 1px solid #999999;
-  padding: 24px;
   padding-top: 0px;
   background-color: white;
   display: flex;
