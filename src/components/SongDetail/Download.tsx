@@ -10,11 +10,11 @@ const imageData = [
 
 const Image = styled.div<{ imgUrl: string }>`
   background: url(${({ imgUrl }) => imgUrl});
-  height: 65px;
+  height: 64px;
   margin-bottom: 10px;
   background-position: -5px -392px;
   width: 80%;
-  margin: 0px 10%;
+  margin: 0px auto;
   margin-top: 24px;
   text-align: center;
 `;

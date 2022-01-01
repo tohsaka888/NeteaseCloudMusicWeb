@@ -9,6 +9,7 @@ const Container = styled.div`
   border-left: 1px solid #dfdfdf;
   display: flex;
   flex-direction: column;
+  min-width: 240px;
 `;
 
 export default function RightPart() {

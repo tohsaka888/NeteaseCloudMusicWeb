@@ -35,9 +35,9 @@ export default function Lyric() {
   return (
     <>
       {data.tlyric && (
-        <div style={{ marginLeft: "240px", marginTop: "8px" }}>
+        <div style={{ marginLeft: "90px", marginTop: "24px" }}>
           <Button
-            type="text"
+            type="link"
             icon={<TranslationOutlined />}
             onClick={() => {
               setIstranslate(!isTanslate);
@@ -47,7 +47,7 @@ export default function Lyric() {
           </Button>
         </div>
       )}
-      <Flex style={{ marginTop: data.tlyric ? "50px" : "80px" }}>
+      <Flex style={{ marginTop: "30px" }}>
         {lyric && lyric?.length >= 20 && (
           <>
             <Container style={{ borderRight: "1px solid #dfdfdf" }}>

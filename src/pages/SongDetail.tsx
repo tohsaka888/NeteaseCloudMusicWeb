@@ -8,12 +8,14 @@ import { SongContext } from "../context/SongDetail/Context";
 import useHttpRequest from "../hooks/useHttpRequest";
 
 const Container = styled.div`
-  margin: 0 18vw;
+  margin: 0 auto;
   border-left: 1px solid #999999;
   border-right: 1px solid #999999;
   padding-top: 0px;
   background-color: white;
   display: flex;
+  min-width: 950px;
+  width: 64vw;
 `;
 
 export default function SongDetail() {

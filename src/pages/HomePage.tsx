@@ -9,11 +9,11 @@ import "../styles/HomePage.css";
 
 const Container = styled.div`
   width: 64vw;
-  margin: 0 18vw;
+  margin: 0 auto;
   display: flex;
   background-color: white;
   box-sizing: border-box;
-  min-width: 900px;
+  min-width: 950px;
 `;
 
 export default function HomePage() {

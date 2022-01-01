@@ -34,8 +34,8 @@ const TopArea = styled.div`
 `;
 
 const Avatar = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border: 1px solid #dadada;
   cursor: pointer;
 `;
@@ -48,7 +48,7 @@ const TextArea = styled.div`
 `;
 
 const Nickname = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   margin-right: 3px;
 `;
@@ -133,11 +133,7 @@ export default function Login() {
               </TextArea>
               <Level>Lv.8</Level>
               <div>
-                <Button
-                  type="primary"
-                  className="sign"
-                  style={{ width: "90px", height: "30px" }}
-                >
+                <Button type="primary" className="sign" size="small">
                   签到
                 </Button>
               </div>

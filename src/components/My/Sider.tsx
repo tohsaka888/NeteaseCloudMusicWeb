@@ -17,7 +17,7 @@ export default function Sider() {
   useEffect(() => {
     const sendRequest = async () => {
       if (loginProps?.loginStatus.code === 200) {
-        const profile = loginProps?.loginStatus.profile|| 0;
+        const profile = loginProps?.loginStatus.profile || 0;
         if (profile) {
           const data = await getUserPlaylist(profile.userId);
           if (data.code === 200) {
@@ -43,7 +43,12 @@ export default function Sider() {
       }
     };
     sendRequest();
-  }, [loginProps?.loginStatus.code, loginProps?.loginStatus.profile, navigator, params.id]);
+  }, [
+    loginProps?.loginStatus.code,
+    loginProps?.loginStatus.profile,
+    navigator,
+    params.id,
+  ]);
 
   return (
     <Layout.Sider
@@ -56,6 +61,7 @@ export default function Sider() {
         overflow: "auto",
         borderLeft: "1px solid rgb(211, 211, 211)",
         textAlign: "center",
+        minWidth: "150px",
       }}
     >
       {created.length !== 0 ? (
@@ -64,6 +70,7 @@ export default function Sider() {
           mode="inline"
           defaultSelectedKeys={[created[0].id.toString()]}
           defaultOpenKeys={["created"]}
+          style={{ minWidth: "100px" }}
         >
           <Menu.SubMenu key={"created"} title={"我创建的歌单"}>
             {created.map((item: any) => {

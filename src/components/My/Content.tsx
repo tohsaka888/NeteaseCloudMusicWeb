@@ -16,6 +16,7 @@ export default function Content() {
         overflow: "auto",
         paddingRight: "18vw",
         borderBottomWidth: "0px",
+        minWidth: "950px",
       }}
     >
       <div style={{ background: "white", height: "100%" }}>

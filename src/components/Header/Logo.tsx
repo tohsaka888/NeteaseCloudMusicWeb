@@ -5,6 +5,7 @@ import styled from "styled-components";
 const LogoContainer = styled.h1`
   width: 157px;
   height: 100%;
+  min-width: 157px;
   margin-right: 20px;
   cursor: pointer;
   background-position: 0 0;

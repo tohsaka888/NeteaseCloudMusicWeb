@@ -1,5 +1,5 @@
 .container {
-  padding-left: 18vw;
+  margin: 0px auto;
   display: flex;
   width: 64vw;
   background-color: #f9f9f9 !important;

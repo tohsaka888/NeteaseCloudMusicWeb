@@ -20,6 +20,7 @@ const Container = styled.div`
   background-color: white;
   border: 1px solid rgb(211, 211, 211);
   border-bottom: 0px;
+  min-width: 750px;
 `;
 
 export default function PlaylistDetail() {

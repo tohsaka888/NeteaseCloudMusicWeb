@@ -17,36 +17,47 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 18vw;
+  padding: 0 auto;
   box-sizing: border-box;
+  display: flex;
   /* position: absolute; */
   background-image: ${({ currentUrl }) =>
     `url(${currentUrl}?imageView&blur=40x20)`};
 `;
 
 const ImageArea = styled.div`
-  width: 48vw;
-  min-width: 600px;
-  position: relative;
+  width: 64vw;
+  min-width: 950px;
+  /* position: relative; */
+  margin: 0 auto;
+  display: flex;
+  min-height: 272px;
 `;
 
 const BannerImage = styled.img`
-  width: 100%;
+  width: 48vw;
   height: 100%;
+  min-width: 75%;
+  min-height: 272px !important;
+  /* position: sticky; */
 `;
 
 const Download = styled.div`
   width: 16vw;
   height: 273px;
-  position: absolute;
+  min-width: 25% !important;
+  min-height: 273px;
+  /* position: absolute; */
   background-image: url("https://s2.music.126.net/style/web2/img/index/download.png?b6cf2647cb3dbaedebebeb422d2f0268");
-  float: right;
   z-index: 10;
-  left: 66vw;
   cursor: pointer;
   background-size: cover;
   min-width: 200px;
   overflow: hidden;
+  top: 0px;
+  border-bottom: 8px solid black;
+  /* display: inline; */
+  /* position: absolute; */
 `;
 
 export default function Banner() {
@@ -65,7 +76,6 @@ export default function Banner() {
   }, []);
   return (
     <BannerContext.Provider value={{ bannerRef: bannerRef }}>
-      <Download />
       <SwitchButton direction="left" />
       <SwitchButton direction="right" />
       {banners.length !== 0 ? (
@@ -84,6 +94,7 @@ export default function Banner() {
               <Container key={index} currentUrl={item.imageUrl}>
                 <ImageArea>
                   <BannerImage src={item.imageUrl} />
+                  <Download />
                 </ImageArea>
               </Container>
             );
@@ -92,11 +103,12 @@ export default function Banner() {
       ) : (
         <LoadingArea
           height="273px"
-          width="48vw"
+          width="64vw"
           style={{
             backgroundColor: "white",
-            marginLeft: "18vw",
-            marginRight: "18vw",
+            marginLeft: "auto",
+            marginRight: "auto",
+            minWidth: "950px",
           }}
         />
       )}

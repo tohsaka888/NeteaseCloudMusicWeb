@@ -22,16 +22,17 @@ const CoverImage = styled.img`
 
 const Mask = styled.div`
   background: url("https://s2.music.126.net/style/web2/img/coverall.png?f3140a480b5eaf3860e3f4b3d2515d75");
-  position: absolute;
+  /* position: absolute; */
   width: 206px;
   height: 205px;
-  top: 115px;
-  left: 20vw;
+  /* top: 115px;
+  left: 20vw; */
   background-position: -140px -580px;
+  margin-left: 5vw;
 `;
 
 const InfoArea = styled.div`
-  margin-left: 250px;
+  margin-left: 20px;
 `;
 
 const Title = styled.div`
@@ -78,7 +79,7 @@ export default function MusicInfo(): JSX.Element {
   return (
     <>
       {song.songs.length !== 0 && (
-        <>
+        <Flex>
           <Mask>
             <CoverImage src={song.songs[0].al.picUrl} />
           </Mask>
@@ -121,7 +122,7 @@ export default function MusicInfo(): JSX.Element {
               </Button>
             </Flex>
           </InfoArea>
-        </>
+        </Flex>
       )}
     </>
   );

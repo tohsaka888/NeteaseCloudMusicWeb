@@ -15,6 +15,7 @@ const Button = styled.div`
   margin-left: 20px;
   cursor: pointer;
   box-shadow: 0px 0px 1px 1px #4f4f4f;
+  min-width: 100px;
 `;
 
 export default function DevelopCenter() {

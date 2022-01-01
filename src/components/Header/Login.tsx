@@ -185,7 +185,7 @@ export default function Login() {
       {loginStatus.profile && (
         <Popover placement="bottom" content={PopoverContent}>
           <Avatar
-            style={{ marginLeft: "16px" }}
+            style={{ marginLeft: "16px", minWidth: "30px" }}
             src={loginStatus.profile.avatarUrl}
           />
         </Popover>
