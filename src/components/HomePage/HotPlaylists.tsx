@@ -32,7 +32,7 @@ const Mask = styled.div`
   cursor: pointer;
 `;
 
-const PlaylistBottom = styled.div`
+export const PlaylistBottom = styled.div`
   background-image: url("https://s2.music.126.net/style/web2/img/coverall.png?875fada230905865047312b7cad556bd");
   background-position: 0 -537px;
   height: 27px;
@@ -41,7 +41,7 @@ const PlaylistBottom = styled.div`
   position: absolute;
 `;
 
-const BottomIcon = styled.div`
+export const BottomIcon = styled.div`
   background-image: url("https://s2.music.126.net/style/web2/img/iconall.png?05d79bb7dd58d4f453ef3cbb47dd0f78");
   background-position: 0 -24px;
   float: left;
@@ -52,7 +52,7 @@ const BottomIcon = styled.div`
   bottom: -1px;
 `;
 
-const BottomIconPlay = styled.div`
+export const BottomIconPlay = styled.div`
   position: absolute;
   right: 10px;
   bottom: 4px;
@@ -62,7 +62,7 @@ const BottomIconPlay = styled.div`
   background-image: url("https://s2.music.126.net/style/web2/img/iconall.png?05d79bb7dd58d4f453ef3cbb47dd0f78");
 `;
 
-const PlayCount = styled.div`
+export const PlayCount = styled.div`
   position: absolute;
   bottom: 4px;
   color: #ccc;
