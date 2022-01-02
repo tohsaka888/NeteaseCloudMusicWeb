@@ -1,1 +1,1 @@
-export const PlayUrl = `https://music-api.heheda.top`
+export const PlayUrl = `http://music.eleuu.com`;
