@@ -22,6 +22,7 @@ import PlaylistDetail from "./pages/PlaylistDetail";
 import Shop from "./pages/Shop";
 import Toplist from "./pages/Toplist";
 import SongDetail from "./pages/SongDetail";
+import { BackTop } from "antd";
 
 const PlaylistContainer = styled.div`
   padding: 0px 18vw;
@@ -71,7 +72,9 @@ function App() {
               <Route path="musician" element={<Musician />} />
               <Route path="download" element={<Download />} />
               <Route path="discover/toplist" element={<Toplist />} />
-              <Route path="discover/playlist" element={<Playlist />} />
+              <Route path="discover/playlist" element={<Playlist />}>
+                <Route path=":playlistParams" element={<Playlist />} />
+              </Route>
               <Route path="discover/djradio" element={<DjRadio />} />
               <Route path="discover/artist" element={<Artist />} />
               <Route path="discover/album" element={<Album />} />
@@ -86,6 +89,7 @@ function App() {
               <Route path="song/:id" element={<SongDetail />} />
             </Routes>
             <MusicController />
+            <BackTop />
           </CurrentTimeContext.Provider>
         </LoginContext.Provider>
       </MusicPlayContext.Provider>
