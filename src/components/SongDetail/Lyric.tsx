@@ -34,7 +34,7 @@ export default function Lyric() {
   const lyric = useLrcParser(data);
   return (
     <>
-      {data.tlyric && (
+      {data.tlyric && data.tlyric.lyric && (
         <div style={{ marginLeft: "90px", marginTop: "24px" }}>
           <Button
             type="link"
