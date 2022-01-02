@@ -1,6 +1,5 @@
 import { DownCircleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import React from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -13,6 +12,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid #c20c0c;
+  margin-bottom: 24px;
 `;
 
 const Category = styled.div`
@@ -29,7 +29,9 @@ export default function Header({ category = "全部" }: Props) {
           <DownCircleOutlined />
         </Button>
       </Category>
-      <Button type="primary" style={{background: '#c20c0c'}}>热门</Button>
+      <Button type="primary" style={{ background: "#c20c0c" }}>
+        热门
+      </Button>
     </Container>
   );
 }
