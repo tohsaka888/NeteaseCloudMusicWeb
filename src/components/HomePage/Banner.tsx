@@ -55,7 +55,7 @@ const Download = styled.div`
   min-width: 200px;
   overflow: hidden;
   top: 0px;
-  border-bottom: 8px solid black;
+  border-bottom: 8px solid #222222;
   /* display: inline; */
   /* position: absolute; */
 `;
