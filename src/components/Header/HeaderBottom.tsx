@@ -58,8 +58,9 @@ export default function HeaderBottom({ defaultSelectedKey }: Props) {
     setSelectKey(route);
   };
   return (
-    <Container show={location.pathname === "/"}>
-      {location.pathname === "/" && (
+    <Container show={location.pathname === "/" || location.pathname.includes("/discover")}>
+      {(location.pathname === "/" ||
+        location.pathname.includes("/discover")) && (
         <Menu>
           <Item
             selectedKey={selectedKey}
