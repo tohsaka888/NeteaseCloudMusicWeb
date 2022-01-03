@@ -57,7 +57,7 @@ export default function Sider() {
       width={"15vw"}
       style={{
         position: "fixed",
-        height: "87vh",
+        height: "90vh",
         overflow: "auto",
         borderLeft: "1px solid rgb(211, 211, 211)",
         textAlign: "center",

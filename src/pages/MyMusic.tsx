@@ -7,7 +7,7 @@ import { LoginContext, VisibleContext } from "../context/Context";
 import "../styles/MyMusic.css";
 
 const Container = styled.div`
-  height: 82vh;
+  height: 90vh;
   background-color: white;
   display: flex;
   justify-content: center;

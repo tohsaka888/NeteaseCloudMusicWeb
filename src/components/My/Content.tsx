@@ -6,7 +6,7 @@ export default function Content() {
   return (
     <Layout.Content
       style={{
-        height: "87vh",
+        height: "90vh",
         marginLeft: "15vw",
         position: "fixed",
         width: "67vw",
