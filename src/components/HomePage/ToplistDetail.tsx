@@ -130,7 +130,7 @@ export default function ToplistDetail({ list }: Props): JSX.Element {
           );
         })
       ) : (
-        <LoadingArea height="20vh" />
+        <LoadingArea height="60vh" />
       )}
     </Container>
   );
