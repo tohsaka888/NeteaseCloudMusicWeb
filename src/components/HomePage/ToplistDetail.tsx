@@ -92,6 +92,7 @@ export default function ToplistDetail({ list }: Props): JSX.Element {
           <PlaylistName
             onClick={() => {
               navigator(`/playlist/${list.id}`);
+              window.scroll({ top: 0 });
             }}
           >
             {list.name}
@@ -101,6 +102,7 @@ export default function ToplistDetail({ list }: Props): JSX.Element {
               style={{ fontSize: "20px", color: "#999999" }}
               onClick={() => {
                 navigator(`/playlist/${list.id}`);
+                window.scroll({ top: 0 });
               }}
             />
             <FileAddOutlined
@@ -118,6 +120,7 @@ export default function ToplistDetail({ list }: Props): JSX.Element {
                 <MusicName
                   onClick={() => {
                     navigator(`/song/${item.id}`);
+                    window.scroll({ top: 0 });
                   }}
                 >
                   {item.name}
