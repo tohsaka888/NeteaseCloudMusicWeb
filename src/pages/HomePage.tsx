@@ -14,6 +14,7 @@ const Container = styled.div`
   background-color: white;
   box-sizing: border-box;
   min-width: 950px;
+  border-right: 1px solid #cecece;
 `;
 
 export default function HomePage() {

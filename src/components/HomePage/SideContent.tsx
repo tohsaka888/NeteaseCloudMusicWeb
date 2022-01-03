@@ -7,7 +7,10 @@ const Container = styled.div`
   width: 16vw;
   height: 100%;
   border: 1px solid #cecece;
+  border-left: none;
+  border-right: none;
   min-width: 25%;
+  /* height: 100%; */
 `;
 
 export default function SideContent() {

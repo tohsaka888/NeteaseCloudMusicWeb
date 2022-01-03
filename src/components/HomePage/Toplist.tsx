@@ -1,14 +1,16 @@
 import { StarFilled } from "@ant-design/icons";
 import styled from "styled-components";
+import useHttpRequest from "../../hooks/useHttpRequest";
 import "../../styles/HomePage.css";
+import ToplistDetail from "./ToplistDetail";
 
 const Container = styled.div`
-  padding: 0px 18px;
   background: #f5f5f5;
-  border: 1px solid #fff;
   margin-top: 16px;
-  padding-bottom: 36px;
   border: 1px solid #d3d3d3;
+  border-right: none;
+  border-bottom: none;
+  display: flex;
 `;
 
 const Title = styled.div`
@@ -27,6 +29,24 @@ const Front = styled.div`
 `;
 
 export default function Toplist() {
+  const soaringList = useHttpRequest({
+    api: "/playlist/detail",
+    credentials: "include",
+    method: "GET",
+    requestData: JSON.stringify({ id: 19723756 }),
+  });
+  const newList = useHttpRequest({
+    api: "/playlist/detail",
+    credentials: "include",
+    method: "GET",
+    requestData: JSON.stringify({ id: 3779629 }),
+  });
+  const originalList = useHttpRequest({
+    api: "/playlist/detail",
+    credentials: "include",
+    method: "GET",
+    requestData: JSON.stringify({ id: 2884035 }),
+  });
   return (
     <>
       <Title>
@@ -35,7 +55,11 @@ export default function Toplist() {
           <div>榜单</div>
         </Front>
       </Title>
-      <Container></Container>
+      <Container>
+        <ToplistDetail list={soaringList.playlist || []} />
+        <ToplistDetail list={newList.playlist || []} />
+        <ToplistDetail list={originalList.playlist || []} />
+      </Container>
     </>
   );
 }
