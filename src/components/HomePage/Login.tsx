@@ -20,8 +20,11 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   border: 1px solid #cecece;
-  z-index: 1000;
-  position: relative;
+  border-left: none;
+  border-right: none;
+  border-top: 0px;
+  /* z-index: 1000; */
+  /* position: relative; */
 `;
 
 const TopArea = styled.div`
@@ -30,7 +33,7 @@ const TopArea = styled.div`
   align-items: center;
   font-size: 12px;
   height: 91px;
-  z-index: 1000;
+  /* z-index: 1000; */
 `;
 
 const Avatar = styled.img`
