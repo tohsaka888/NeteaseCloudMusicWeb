@@ -4,7 +4,7 @@ import { networkError } from "../Errors";
 const getRecommendPlaylists = async () => {
   try {
     const res = await fetch(`${BaseUrl}/recommend/resource`, {
-      method: "POST",
+      method: "GET",
       mode: "cors",
       credentials: "include",
     });
