@@ -1,5 +1,6 @@
 import { FileAddOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoadingArea from "./LoadingArea";
 
@@ -37,6 +38,10 @@ const CoverImage = styled.img`
 const PlaylistName = styled.div`
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 const Item = styled.div`
@@ -48,6 +53,16 @@ const Item = styled.div`
   width: 100%;
 `;
 
+const Mask = styled.div`
+  background: url("https://s2.music.126.net/style/web2/img/coverall.png?ab14b6bc1d7f9b6791c1cdbe2747b54d");
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-position: -145px -57px;
+  margin-left: 24px;
+  cursor: pointer;
+`;
+
 const Number = styled.div<{ index: number }>`
   font-weight: bold;
   margin-right: 8px;
@@ -55,16 +70,38 @@ const Number = styled.div<{ index: number }>`
   font-size: 16px;
 `;
 
+const MusicName = styled.div`
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
 export default function ToplistDetail({ list }: Props): JSX.Element {
+  const navigator = useNavigate();
   return (
     <Container>
       <Flex index={0}>
         <CoverImage src={list.coverImgUrl || ""} />
+        <Mask
+          onClick={() => {
+            navigator(`/playlist/${list.id}`);
+          }}
+        />
         <div style={{ marginLeft: "16px" }}>
-          <PlaylistName>{list.name}</PlaylistName>
+          <PlaylistName
+            onClick={() => {
+              navigator(`/playlist/${list.id}`);
+            }}
+          >
+            {list.name}
+          </PlaylistName>
           <div style={{ marginTop: "8px" }}>
             <PlayCircleOutlined
               style={{ fontSize: "20px", color: "#999999" }}
+              onClick={() => {
+                navigator(`/playlist/${list.id}`);
+              }}
             />
             <FileAddOutlined
               style={{ fontSize: "20px", color: "#999999", marginLeft: "8px" }}
@@ -78,7 +115,13 @@ export default function ToplistDetail({ list }: Props): JSX.Element {
             <Flex key={index} index={index + 1}>
               <Item>
                 <Number index={index}>{index + 1}</Number>
-                {item.name}
+                <MusicName
+                  onClick={() => {
+                    navigator(`/song/${item.id}`);
+                  }}
+                >
+                  {item.name}
+                </MusicName>
               </Item>
             </Flex>
           );
