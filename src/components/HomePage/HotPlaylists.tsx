@@ -140,18 +140,64 @@ export default function HotPlaylists() {
           <StarFilled style={{ color: "#c10d0c", marginRight: "6px" }} />
           <div>热门推荐</div>
           <SimpleMenu>
-            <Item>华语</Item>
+            <Item
+              onClick={() => {
+                navigator(
+                  `/discover/playlist/${JSON.stringify({ category: "华语" })}`
+                );
+              }}
+            >
+              华语
+            </Item>
             <Item>|</Item>
-            <Item>流行</Item>
+            <Item
+              onClick={() => {
+                navigator(
+                  `/discover/playlist/${JSON.stringify({ category: "流行" })}`
+                );
+              }}
+            >
+              流行
+            </Item>
             <Item>|</Item>
-            <Item>摇滚</Item>
+            <Item
+              onClick={() => {
+                navigator(
+                  `/discover/playlist/${JSON.stringify({ category: "摇滚" })}`
+                );
+              }}
+            >
+              摇滚
+            </Item>
             <Item>|</Item>
-            <Item>民谣</Item>
+            <Item
+              onClick={() => {
+                navigator(
+                  `/discover/playlist/${JSON.stringify({ category: "民谣" })}`
+                );
+              }}
+            >
+              民谣
+            </Item>
             <Item>|</Item>
-            <Item>电子</Item>
+            <Item
+              onClick={() => {
+                navigator(
+                  `/discover/playlist/${JSON.stringify({ category: "电子" })}`
+                );
+              }}
+            >
+              电子
+            </Item>
           </SimpleMenu>
         </Front>
-        <More>
+        <More
+          onClick={() => {
+            navigator(
+              `/discover/playlist/${JSON.stringify({ category: "全部" })}`
+            );
+          }}
+        >
           更多
           <ArrowRightOutlined
             style={{
