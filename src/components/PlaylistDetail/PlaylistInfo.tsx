@@ -1,5 +1,5 @@
-import { Avatar, Button } from "antd";
-import React from "react";
+import { Avatar, Button, Typography } from "antd";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import {
@@ -8,6 +8,10 @@ import {
   HeartOutlined,
   PlayCircleOutlined,
 } from "@ant-design/icons";
+import usePlayMusic from "../../hooks/usePlayMusic";
+import { MusicPlayContext } from "../../context/Context";
+import { Tag as AntdTag } from "antd";
+import { Flex } from "@chakra-ui/react";
 
 type Props = {
   info: any;
@@ -83,6 +87,14 @@ const Time = styled.div`
 `;
 
 export default function PlaylistInfo({ info }: Props): JSX.Element {
+  const playMusic = usePlayMusic();
+  const props = useContext(MusicPlayContext);
+  const createRandomColor = () => {
+    let r = Math.floor(Math.random() * 255);
+    let g = Math.floor(Math.random() * 255);
+    let b = Math.floor(Math.random() * 255);
+    return "rgba(" + r + "," + g + "," + b + ",0.8)";
+  };
   return (
     <Container>
       <ImgContainer>
@@ -100,8 +112,18 @@ export default function PlaylistInfo({ info }: Props): JSX.Element {
             {moment(info.createTime).format("YYYY-MM-DD")}&nbsp;&nbsp;创建
           </Time>
         </Creator>
-        <Creator style={{ marginTop: "14px" }}>
-          <Button type="primary" icon={<PlayCircleOutlined size={80} />}>
+        <Creator style={{ marginTop: "12px" }}>
+          <Button
+            type="primary"
+            icon={<PlayCircleOutlined size={80} />}
+            onClick={() => {
+              let id = (info.tracks[0] && info.tracks[0].id) || -1;
+              if (id !== -1) {
+                playMusic(id);
+                props?.setRecord(info.tracks[0]);
+              }
+            }}
+          >
             播放
           </Button>
           <Button style={{ marginLeft: "8px" }} icon={<HeartOutlined />}>
@@ -114,6 +136,22 @@ export default function PlaylistInfo({ info }: Props): JSX.Element {
             评论
           </Button>
         </Creator>
+        <Flex style={{ marginTop: "12px" }}>
+          {info.tags.length !== 0 ? (
+            info.tags.map((item: any, index: number) => {
+              return <AntdTag color={createRandomColor()}>{item}</AntdTag>;
+            })
+          ) : (
+            <AntdTag color={createRandomColor()}>暂无标签</AntdTag>
+          )}
+        </Flex>
+        <Typography style={{ marginTop: "12px", maxWidth: "600px" }}>
+          <Typography.Paragraph
+            ellipsis={{ rows: 2, expandable: true, symbol: "展开" }}
+          >
+            {info.description || "这个歌单没有描述哦~"}
+          </Typography.Paragraph>
+        </Typography>
       </TextArea>
     </Container>
   );
