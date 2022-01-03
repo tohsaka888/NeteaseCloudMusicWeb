@@ -33,6 +33,7 @@ export default function PlaylistDetail() {
     requestData: JSON.stringify({ id: params.id }),
   });
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     if (data.playlist && params.id && data.playlist.id === +params.id) {
       setIsLoading(false);
     } else {
