@@ -27,6 +27,7 @@ const Mask = styled.div`
   height: 205px;
   /* top: 115px;
   left: 20vw; */
+  min-width: 206px;
   background-position: -140px -580px;
   margin-left: 5vw;
 `;
