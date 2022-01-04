@@ -30,6 +30,8 @@ const ImgContainer = styled.div`
 const MusicPicture = styled.img`
   width: 208px;
   height: 208px;
+  min-width: 208px;
+  min-height: 208px;
 `;
 
 const Title = styled.div`
