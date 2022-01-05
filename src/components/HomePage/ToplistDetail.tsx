@@ -72,6 +72,9 @@ const Number = styled.div<{ index: number }>`
 
 const MusicName = styled.div`
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   :hover {
     text-decoration: underline;
   }
