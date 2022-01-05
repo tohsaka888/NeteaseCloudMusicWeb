@@ -145,12 +145,7 @@ export default function MusicController() {
     <Affix
       offsetBottom={0}
       style={{
-        position:
-          params.pathname === "/" ||
-          params.pathname.includes("/playlist") ||
-          params.pathname.includes("/song")
-            ? "sticky"
-            : "absolute",
+        position: !params.pathname.includes("/my") ? "sticky" : "absolute",
         bottom: 0,
       }}
     >
