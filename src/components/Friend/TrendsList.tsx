@@ -1,5 +1,5 @@
 import { Box, Flex, Avatar, Text, Image } from "@chakra-ui/react";
-import { List, message, Skeleton, Typography, Divider } from "antd";
+import { List, message, Typography, Divider } from "antd";
 import moment from "moment";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import ImageViewer from "react-simple-image-viewer";
 import ShowImage from "./ShowImage";
 import { CommentOutlined, LikeOutlined } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
+import SkeletonArea from "../Common/SkeletonArea";
 
 const Container = styled.div`
   width: 64vw;
@@ -196,6 +197,7 @@ export default function TrendsList() {
   const lasttimeRef = useRef<number>(-1);
   const [event, setEvent] = useState<any[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const sendRequest = useCallback(async () => {
     try {
       const res = await fetch(
@@ -218,7 +220,9 @@ export default function TrendsList() {
     }
   }, []);
   useEffect(() => {
-    sendRequest();
+    sendRequest().then(() => {
+      setLoading(false);
+    });
   }, [sendRequest]);
   return (
     <Container id="target">
@@ -227,15 +231,20 @@ export default function TrendsList() {
         next={sendRequest}
         dataLength={event.length}
         hasMore={hasMore}
-        loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+        loader={<SkeletonArea length={20} />}
         endMessage={<Divider plain>到底啦,再怎么翻也没有了~ 🤐</Divider>}
         style={{ overflowX: "hidden" }}
       >
-        <List
-          header={null}
-          dataSource={event}
-          renderItem={(item, index) => <RenderItem item={item} index={index} />}
-        />
+        {!loading && (
+          <List
+            header={null}
+            dataSource={event}
+            locale={{ emptyText: "" }}
+            renderItem={(item, index) => (
+              <RenderItem item={item} index={index} />
+            )}
+          />
+        )}
       </InfiniteScroll>
     </Container>
   );
