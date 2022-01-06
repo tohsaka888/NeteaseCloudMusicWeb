@@ -1,13 +1,13 @@
-import { Box, Flex, Avatar, Divider, Text, Image } from "@chakra-ui/react";
-import { List, message, Typography } from "antd";
+import { Box, Flex, Avatar, Text, Image } from "@chakra-ui/react";
+import { List, message, Skeleton, Typography, Divider } from "antd";
 import moment from "moment";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BaseUrl, httpHeader } from "../../request/BaseUrl";
-import LoadingArea from "../HomePage/LoadingArea";
 import ImageViewer from "react-simple-image-viewer";
 import ShowImage from "./ShowImage";
 import { CommentOutlined, LikeOutlined } from "@ant-design/icons";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Container = styled.div`
   width: 64vw;
@@ -193,9 +193,9 @@ const RenderItem = ({ item, index }: ItemProps) => {
 };
 
 export default function TrendsList() {
-  const eventRef = useRef<any[]>([]);
   const lasttimeRef = useRef<number>(-1);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [event, setEvent] = useState<any[]>([]);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const sendRequest = useCallback(async () => {
     try {
       const res = await fetch(
@@ -207,32 +207,36 @@ export default function TrendsList() {
         }
       );
       const data = await res.json();
-      eventRef.current = data.event;
-      lasttimeRef.current = data.lasttime;
-      if (eventRef.current.length) {
-        setLoading(false);
+      setHasMore(data.more);
+      if (data.event) {
+        setEvent((e) => [...e, ...data.event]);
+        lasttimeRef.current = data.lasttime;
       }
     } catch (error) {
       message.error("网络错误请检查网络设置");
       console.log(error);
-      setLoading(true);
     }
   }, []);
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
   return (
-    <Container>
+    <Container id="target">
       <ListHeader>动态</ListHeader>
-      {!loading ? (
+      <InfiniteScroll
+        next={sendRequest}
+        dataLength={event.length}
+        hasMore={hasMore}
+        loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+        endMessage={<Divider plain>到底啦,再怎么翻也没有了~ 🤐</Divider>}
+        style={{ overflowX: "hidden" }}
+      >
         <List
           header={null}
-          dataSource={eventRef.current}
+          dataSource={event}
           renderItem={(item, index) => <RenderItem item={item} index={index} />}
         />
-      ) : (
-        <LoadingArea height="90vh" />
-      )}
+      </InfiniteScroll>
     </Container>
   );
 }
