@@ -32,7 +32,8 @@ export default function Header() {
             }}
           >
             发现音乐
-            <BottomButton />
+            {(location.pathname === "/" ||
+              location.pathname.includes("/discover")) && <BottomButton />}
           </Menu.Item>
           <Menu.Item
             key={"/my"}
@@ -41,6 +42,7 @@ export default function Header() {
             }}
           >
             我的音乐
+            {location.pathname.includes("/my") && <BottomButton />}
           </Menu.Item>
           <Menu.Item
             key={"/friend"}
@@ -49,6 +51,7 @@ export default function Header() {
             }}
           >
             朋友
+            {location.pathname.includes("/friend") && <BottomButton />}
           </Menu.Item>
           <Menu.Item
             key={"/shop"}
@@ -57,6 +60,7 @@ export default function Header() {
             }}
           >
             商城
+            {location.pathname.includes("/shop") && <BottomButton />}
           </Menu.Item>
           <Menu.Item
             key={"/musician"}
@@ -65,6 +69,7 @@ export default function Header() {
             }}
           >
             音乐人
+            {location.pathname.includes("/musician") && <BottomButton />}
           </Menu.Item>
           <Menu.Item
             key={"/download"}
@@ -73,6 +78,7 @@ export default function Header() {
             }}
           >
             下载客户端
+            {location.pathname.includes("/download") && <BottomButton />}
           </Menu.Item>
         </Menu>
         <Search />
