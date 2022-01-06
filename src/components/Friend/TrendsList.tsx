@@ -9,6 +9,7 @@ import ShowImage from "./ShowImage";
 import { CommentOutlined, LikeOutlined } from "@ant-design/icons";
 import InfiniteScroll from "react-infinite-scroll-component";
 import SkeletonArea from "../Common/SkeletonArea";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 64vw;
@@ -38,6 +39,7 @@ const RenderItem = ({ item, index }: ItemProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string[]>([]);
   const [imgIndex, setImgIndex] = useState<number>(0);
+  const navigator = useNavigate();
   const showPicture = useCallback((pics: any[], i: number) => {
     let src: string[] = [];
     pics.forEach((item) => {
@@ -82,6 +84,10 @@ const RenderItem = ({ item, index }: ItemProps) => {
                 background={"#f5f5f5"}
                 marginTop={"16px"}
                 width={"850px"}
+                cursor={"pointer"}
+                onClick={() => {
+                  navigator(`/song/${data.song.id}`);
+                }}
               >
                 <Flex align={"center"}>
                   <Image
