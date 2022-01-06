@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getTopArtists } from "../../request/HomePage/Artists";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 const Container = styled.div`
   display: flex;

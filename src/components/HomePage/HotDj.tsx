@@ -2,7 +2,7 @@ import { Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getHotDj } from "../../request/HomePage/HotDj";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 const Container = styled.div`
   background-color: transparent;

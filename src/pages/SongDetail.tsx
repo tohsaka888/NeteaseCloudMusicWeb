@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import LoadingArea from "../components/HomePage/LoadingArea";
+import LoadingArea from "../components/Common/LoadingArea";
 import LeftPart from "../components/SongDetail/LeftPart";
 import RightPart from "../components/SongDetail/RightPart";
 import { SongContext } from "../context/SongDetail/Context";

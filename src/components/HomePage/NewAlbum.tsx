@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getNewAlbum } from "../../request/HomePage/newAlbum";
 import "../../styles/HomePage.css";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 const Container = styled.div`
   padding: 0px 18px;

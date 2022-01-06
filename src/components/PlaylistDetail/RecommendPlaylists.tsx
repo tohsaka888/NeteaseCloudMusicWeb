@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import useHttpRequest from "../../hooks/useHttpRequest";
-import LoadingArea from "../HomePage/LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 import { Header } from "./Subscribers";
 
 const CoverImage = styled.img`

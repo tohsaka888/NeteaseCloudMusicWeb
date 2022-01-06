@@ -2,7 +2,7 @@ import { FileAddOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 type Props = {
   list: any;

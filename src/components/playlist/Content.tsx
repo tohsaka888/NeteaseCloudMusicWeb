@@ -9,7 +9,7 @@ import {
   PlayCount,
   PlaylistBottom,
 } from "../HomePage/HotPlaylists";
-import LoadingArea from "../HomePage/LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 type Props = {
   playlists: any[];

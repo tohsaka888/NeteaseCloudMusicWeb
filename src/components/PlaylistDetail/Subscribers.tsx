@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import useHttpRequest from "../../hooks/useHttpRequest";
-import LoadingArea from "../HomePage/LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 export const Header = styled.div`
   padding: 5px 0px;

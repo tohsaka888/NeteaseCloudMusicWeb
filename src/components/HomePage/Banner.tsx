@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { BannerContext } from "../../context/HomePage/Context";
 import { sendRequest } from "../../request/HomePage/Banner";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 import SwitchButton from "./SwitchButton";
 
 type ContainerProps = {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { sendRequest } from "../../request/HomePage/HotPlaylists";
 import "../../styles/HomePage.css";
-import LoadingArea from "./LoadingArea";
+import LoadingArea from "../Common/LoadingArea";
 
 const Container = styled.div`
   display: flex;
