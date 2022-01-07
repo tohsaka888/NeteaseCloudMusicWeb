@@ -1,11 +1,12 @@
 import { LikeOutlined } from "@ant-design/icons";
 import { Textarea } from "@chakra-ui/react";
 import { Button, Comment, Divider, List } from "antd";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { LoginContext } from "../../context/Context";
 import useHttpRequest from "../../hooks/useHttpRequest";
+import useHttpRequestFunc from "../../hooks/useHttpRequestFunc";
 import ListHeader from "./ListHeader";
 
 type Props = {
@@ -96,10 +97,12 @@ const MusicComment = ({ item, index }: Props) => {
   );
 };
 
-export default function CommentList() {
+export default function CommentList({ type }: { type: number }) {
   const params = useParams();
   const location = useLocation();
+  const [value, setValue] = useState<string>("");
   const { loginStatus } = useContext(LoginContext);
+  const sendRequest = useHttpRequestFunc();
   const data = useHttpRequest({
     api:
       location.pathname.includes("playlist") || location.pathname.includes("my")
@@ -113,7 +116,15 @@ export default function CommentList() {
     <Container>
       <Title>评论区</Title>
       <Comment
-        content={<Textarea rows={4} />}
+        content={
+          <Textarea
+            rows={4}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            value={value}
+          />
+        }
         avatar={(loginStatus.profile && loginStatus.profile.avatarUrl) || ""}
         author={
           <UserName>
@@ -121,7 +132,25 @@ export default function CommentList() {
               "游客账户"}
           </UserName>
         }
-        actions={[<Button type="primary">发送评论</Button>]}
+        actions={[
+          <Button
+            type="primary"
+            onClick={() => {
+              sendRequest(
+                "/comment",
+                JSON.stringify({
+                  t: 1,
+                  type: type,
+                  content: value,
+                  id: params.id && +params.id,
+                }),
+                "POST"
+              );
+            }}
+          >
+            发送评论
+          </Button>,
+        ]}
       />
       <List
         style={{ marginTop: "24px" }}

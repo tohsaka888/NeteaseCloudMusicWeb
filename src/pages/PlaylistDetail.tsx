@@ -59,7 +59,7 @@ export default function PlaylistDetail() {
           <>
             <PlaylistInfo info={data.playlist} />
             <MusicList info={data.playlist} />
-            <CommentList />
+            <CommentList type={2} />
           </>
         )}
       </div>

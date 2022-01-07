@@ -14,7 +14,7 @@ export default function LeftPart() {
     <Container>
       <MusicInfo />
       <Lyric />
-      <CommentList />
+      <CommentList type={0} />
     </Container>
   );
 }
