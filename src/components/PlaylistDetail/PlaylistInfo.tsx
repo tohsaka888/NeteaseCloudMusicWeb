@@ -1,5 +1,5 @@
 import { Avatar, Button, Typography } from "antd";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import {
@@ -91,12 +91,12 @@ const Time = styled.div`
 export default function PlaylistInfo({ info }: Props): JSX.Element {
   const playMusic = usePlayMusic();
   const props = useContext(MusicPlayContext);
-  const createRandomColor = () => {
+  const createRandomColor = useCallback(() => {
     let r = Math.floor(Math.random() * 255);
     let g = Math.floor(Math.random() * 255);
     let b = Math.floor(Math.random() * 255);
     return "rgba(" + r + "," + g + "," + b + ",0.8)";
-  };
+  }, []);
   return (
     <Container>
       <ImgContainer>
@@ -141,7 +141,11 @@ export default function PlaylistInfo({ info }: Props): JSX.Element {
         <Flex style={{ marginTop: "12px" }}>
           {info.tags.length !== 0 ? (
             info.tags.map((item: any, index: number) => {
-              return <AntdTag color={createRandomColor()}>{item}</AntdTag>;
+              return (
+                <AntdTag color={createRandomColor()} key={index}>
+                  {item}
+                </AntdTag>
+              );
             })
           ) : (
             <AntdTag color={createRandomColor()}>暂无标签</AntdTag>

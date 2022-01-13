@@ -100,11 +100,11 @@ export default function MusicController() {
     setCurrentTime(props?.controllerRef.current?.currentTime || 0);
   }, [props?.controllerRef, setCurrentTime]);
   useEffect(() => {
+    console.log(1)
     switch (playStatus) {
       case false:
         if (intervalIdRef.current) {
           clearInterval(intervalIdRef.current);
-          // console.log("pause");
         }
         break;
       case true:
@@ -113,10 +113,9 @@ export default function MusicController() {
         }, 500);
         setPlaying(true);
         intervalIdRef.current = id;
-        // console.log("play");
         break;
     }
-  }, [callback, playStatus, props?.controllerRef, setCurrentTime]);
+  }, [callback, playStatus]);
   const pauseMusic = () => {
     setPlayStatus(false);
     props?.controllerRef.current?.pause();
