@@ -40,7 +40,7 @@ function App() {
   const isMobile = useIsMobile();
   useEffect(() => {
     if (isMobile) {
-      window.open("https://www.baidu.com/", "_self");
+      window.open("https://netease-cloud-music-mobile.vercel.app/", "_self");
     }
   }, [isMobile]);
   return (
