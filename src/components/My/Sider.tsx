@@ -1,5 +1,5 @@
 import { Layout, Menu, Spin } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../../context/Context";
 // import useLoginStatus from "../../hooks/useLoginStatus";
@@ -14,12 +14,13 @@ export default function Sider() {
   const [created, setCreated] = useState<any[]>([]);
   const [favour, setFavour] = useState<any[]>([]);
   const navigator = useNavigate();
+  const controller = useMemo(() => new AbortController(), []);
   useEffect(() => {
     const sendRequest = async () => {
       if (loginProps?.loginStatus.code === 200) {
         const profile = loginProps?.loginStatus.profile || 0;
         if (profile) {
-          const data = await getUserPlaylist(profile.userId);
+          const data = await getUserPlaylist(profile.userId, controller);
           if (data.code === 200) {
             let playlist = data.playlist;
             let userPlaylists: any[] = [];
@@ -43,7 +44,11 @@ export default function Sider() {
       }
     };
     sendRequest();
+    return () => {
+      controller.abort();
+    };
   }, [
+    controller,
     loginProps?.loginStatus.code,
     loginProps?.loginStatus.profile,
     navigator,
