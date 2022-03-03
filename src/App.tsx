@@ -24,6 +24,7 @@ import Toplist from "./pages/Toplist";
 import SongDetail from "./pages/SongDetail";
 import { BackTop } from "antd";
 import useIsMobile from "./hooks/useIsMobile";
+import { SearchContext } from "./context/Search/SearchContext";
 
 const PlaylistContainer = styled.div`
   padding: 0px 18vw;
@@ -37,6 +38,7 @@ function App() {
   const [loginStatus, setLoginStatus] = useState<any>({ profile: null });
   const [currentTime, setCurrentTime] = useState<number>(0);
   const controllerRef = useRef<HTMLAudioElement>();
+  const [searchValue, setSearchValue] = useState<string>("");
   const isMobile = useIsMobile();
   useEffect(() => {
     if (isMobile) {
@@ -72,36 +74,43 @@ function App() {
                   setCurrentTime: setCurrentTime,
                 }}
               >
-                <Header />
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="discover" element={<HomePage />} />
-                  <Route path="my" element={<MyMusic />}>
-                    <Route path=":id" element={<PlaylistDetail />} />
-                  </Route>
-                  <Route path="friend" element={<Friend />} />
-                  <Route path="shop" element={<Shop />} />
-                  <Route path="musician" element={<Musician />} />
-                  <Route path="download" element={<Download />} />
-                  <Route path="discover/toplist" element={<Toplist />} />
-                  <Route path="discover/playlist" element={<Playlist />}>
-                    <Route path=":playlistParams" element={<Playlist />} />
-                  </Route>
-                  <Route path="discover/djradio" element={<DjRadio />} />
-                  <Route path="discover/artist" element={<Artist />} />
-                  <Route path="discover/album" element={<Album />} />
-                  <Route
-                    path="playlist/:id"
-                    element={
-                      <PlaylistContainer>
-                        <PlaylistDetail />
-                      </PlaylistContainer>
-                    }
-                  />
-                  <Route path="song/:id" element={<SongDetail />} />
-                </Routes>
-                <MusicController />
-                <BackTop />
+                <SearchContext.Provider
+                  value={{
+                    searchValue: searchValue,
+                    setSearchValue: setSearchValue,
+                  }}
+                >
+                  <Header />
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="discover" element={<HomePage />} />
+                    <Route path="my" element={<MyMusic />}>
+                      <Route path=":id" element={<PlaylistDetail />} />
+                    </Route>
+                    <Route path="friend" element={<Friend />} />
+                    <Route path="shop" element={<Shop />} />
+                    <Route path="musician" element={<Musician />} />
+                    <Route path="download" element={<Download />} />
+                    <Route path="discover/toplist" element={<Toplist />} />
+                    <Route path="discover/playlist" element={<Playlist />}>
+                      <Route path=":playlistParams" element={<Playlist />} />
+                    </Route>
+                    <Route path="discover/djradio" element={<DjRadio />} />
+                    <Route path="discover/artist" element={<Artist />} />
+                    <Route path="discover/album" element={<Album />} />
+                    <Route
+                      path="playlist/:id"
+                      element={
+                        <PlaylistContainer>
+                          <PlaylistDetail />
+                        </PlaylistContainer>
+                      }
+                    />
+                    <Route path="song/:id" element={<SongDetail />} />
+                  </Routes>
+                  <MusicController />
+                  <BackTop />
+                </SearchContext.Provider>
               </CurrentTimeContext.Provider>
             </LoginContext.Provider>
           </MusicPlayContext.Provider>
