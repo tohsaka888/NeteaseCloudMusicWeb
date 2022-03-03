@@ -26,6 +26,7 @@ export default function Subscribers() {
           data.subscribers.map((item: any, index: number) => {
             return (
               <Col
+                key={index}
                 span={6}
                 style={{
                   display: "flex",
