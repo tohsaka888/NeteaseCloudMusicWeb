@@ -1,6 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Popover } from "antd";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SearchContext } from "../../context/Search/SearchContext";
 import { BaseUrl, httpHeader } from "../../request/BaseUrl";
@@ -42,6 +43,7 @@ const SearchResult = () => {
     songs: [],
     playlists: [],
   });
+  const navigate = useNavigate();
   useEffect(() => {
     if (searchProps?.searchValue) {
       const sendRequest = async () => {
@@ -69,7 +71,14 @@ const SearchResult = () => {
         <Box borderLeft="1px solid #DDDDDD" flex={3}>
           {result && result.songs ? (
             result.songs.map((song, index) => (
-              <Ellipsis key={index}>{song.name}</Ellipsis>
+              <Ellipsis
+                key={index}
+                onClick={() => {
+                  navigate(`/song/${song.id}`);
+                }}
+              >
+                {song.name}
+              </Ellipsis>
             ))
           ) : (
             <Ellipsis>暂无结果</Ellipsis>
@@ -87,7 +96,9 @@ const SearchResult = () => {
         >
           {result && result.artists ? (
             result.artists.map((artist, index) => (
-              <Ellipsis key={index}>{artist.name}</Ellipsis>
+              <Ellipsis key={index} onClick={() => {}}>
+                {artist.name}
+              </Ellipsis>
             ))
           ) : (
             <Ellipsis>暂无结果</Ellipsis>
@@ -105,7 +116,7 @@ const SearchResult = () => {
         >
           {result && result.playlists ? (
             result.playlists.map((playlist, index) => (
-              <Ellipsis key={index}>{playlist.name}</Ellipsis>
+              <Ellipsis key={index} onClick={() => {navigate(`/playlist/${playlist.id}`)}}>{playlist.name}</Ellipsis>
             ))
           ) : (
             <Ellipsis>暂无结果</Ellipsis>
