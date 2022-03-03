@@ -100,7 +100,6 @@ export default function MusicController() {
     setCurrentTime(props?.controllerRef.current?.currentTime || 0);
   }, [props?.controllerRef, setCurrentTime]);
   useEffect(() => {
-    console.log(1)
     switch (playStatus) {
       case false:
         if (intervalIdRef.current) {
