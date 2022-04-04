@@ -1,21 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+import "antd/dist/antd.min.css"; // or 'antd/dist/antd.less'
 import { Layout } from "antd";
 import { ChakraProvider } from "@chakra-ui/react";
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root") as HTMLElement);
+
+root.render(
   <Router>
     <ChakraProvider>
       <Layout>
         <App />
       </Layout>
     </ChakraProvider>
-  </Router>,
-  document.getElementById("root")
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function
