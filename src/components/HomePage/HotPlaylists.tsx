@@ -128,7 +128,7 @@ export default function HotPlaylists() {
       if (!data.fail) {
         setHotPlaylists(data);
       } else {
-        message.error({ content: data.errmsg, key: "networkError" });
+        message.error({ content: data.errmsg, key: "networkError", type: 'error' });
       }
     };
     getHotPlaylists();

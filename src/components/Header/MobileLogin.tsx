@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Checkbox, Divider, Form, Input } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import React, { useContext } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { getLoginStatus, mobileLogin } from "../../request/Header/Login";
@@ -54,7 +54,7 @@ export default function MobileLogin({
         <TextContainer>
           <Text style={{ fontWeight: "bold" }}>短信登录</Text>
           <Text>
-            <Checkbox style={{ marginRight: "5px" }} />
+            {/* <Checkbox style={{ marginRight: "5px" }} /> */}
             自动登录
           </Text>
         </TextContainer>

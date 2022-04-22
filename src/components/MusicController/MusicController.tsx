@@ -124,7 +124,7 @@ export default function MusicController() {
     setPlayStatus(false);
   };
   const onDragging = useCallback(
-    (value) => {
+    (value: number) => {
       setCurrentTime(value);
     },
     [setCurrentTime]
