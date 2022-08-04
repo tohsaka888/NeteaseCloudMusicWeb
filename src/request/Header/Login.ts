@@ -9,7 +9,7 @@ import { networkError } from "../Errors";
  */
 const createQRKey = async () => {
   try {
-    const res = await fetch(`${BaseUrl}/login/qr/key`, {
+    const res = await fetch(`${BaseUrl}/login/qr/key?realIP=116.25.146.177`, {
       mode: "cors",
       credentials: "include",
     });
@@ -28,7 +28,7 @@ const createQRKey = async () => {
  */
 const createQRCode = async (key: string) => {
   try {
-    const res = await fetch(`${BaseUrl}/login/qr/create`, {
+    const res = await fetch(`${BaseUrl}/login/qr/create?realIP=116.25.146.177`, {
       method: "POST",
       body: JSON.stringify({ key: key, qrimg: true }),
       headers: httpHeader,
@@ -51,7 +51,7 @@ const createQRCode = async (key: string) => {
 const checkQRStatus = async (key: string) => {
   const date = Date.now();
   const res = await fetch(
-    `${BaseUrl}/login/qr/check?key=${key}&timerstamp=${date}`,
+    `${BaseUrl}/login/qr/check?key=${key}&timerstamp=${date}&realIP=116.25.146.177`,
     {
       mode: "cors",
       credentials: "include",
@@ -75,7 +75,7 @@ const checkQRStatus = async (key: string) => {
  */
 const  getLoginStatus = async () => {
   try {
-    const res = await fetch(`${BaseUrl}/login/status`, {
+    const res = await fetch(`${BaseUrl}/login/status?realIP=116.25.146.177`, {
       method: "POST",
       headers: httpHeader,
       credentials: "include",
@@ -90,7 +90,7 @@ const  getLoginStatus = async () => {
 
 const mobileLogin = async (phone: string, password: string) => {
   try {
-    const res = await fetch(`${BaseUrl}/login/cellphone`, {
+    const res = await fetch(`${BaseUrl}/login/cellphone?realIP=116.25.146.177`, {
       method: "POST",
       body: JSON.stringify({ phone: phone, password: password }),
       credentials: "include",

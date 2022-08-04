@@ -48,7 +48,7 @@ const SearchResult = () => {
     if (searchProps?.searchValue) {
       const sendRequest = async () => {
         const res = await fetch(
-          `${BaseUrl}/search/suggest?keywords=${searchProps.searchValue}&type=web`,
+          `${BaseUrl}/search/suggest?keywords=${searchProps.searchValue}&type=web&realIP=116.25.146.177`,
           {
             method: "GET",
             headers: httpHeader,

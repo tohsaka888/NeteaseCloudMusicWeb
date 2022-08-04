@@ -7,7 +7,7 @@ const getNewAlbum = async () => {
   let album = [];
   try {
     const res = await fetch(
-      `${BaseUrl}/top/album?offset=0&limit=10&year=${year}&month=${month}`,
+      `${BaseUrl}/top/album?offset=0&limit=10&year=${year}&month=${month}&realIP=116.25.146.177`,
       {
         method: "GET",
         credentials: "include",

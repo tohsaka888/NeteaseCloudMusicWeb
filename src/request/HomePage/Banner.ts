@@ -1,3 +1,10 @@
+/*
+ * @Author: tohsaka888
+ * @Date: 2022-08-04 11:48:19
+ * @LastEditors: tohsaka888
+ * @LastEditTime: 2022-08-04 14:50:43
+ * @Description: 请填写简介
+ */
 import { BaseUrl } from "../BaseUrl";
 
 interface Banners {
@@ -33,7 +40,7 @@ interface Banner {
 }
 
 const sendRequest = async () => {
-  const res = await fetch(`${BaseUrl}/banner`, {
+  const res = await fetch(`${BaseUrl}/banner?realIP=116.25.146.177`, {
     method: "POST",
     body: JSON.stringify({ type: 0 }),
     headers: {

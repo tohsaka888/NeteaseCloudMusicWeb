@@ -1,3 +1,10 @@
+/*
+ * @Author: tohsaka888
+ * @Date: 2022-08-04 11:48:19
+ * @LastEditors: tohsaka888
+ * @LastEditTime: 2022-08-04 14:49:00
+ * @Description: 请填写简介
+ */
 // import { Menu } from "antd";
 import styled from "styled-components";
 import React, { useCallback, useContext } from "react";
@@ -17,7 +24,7 @@ export default function PopoverContent() {
   const props = useContext(LoginContext);
   // const isLogin = useLoginStatus();
   const logout = useCallback(async () => {
-    const res = await fetch(`${BaseUrl}/logout`, {
+    const res = await fetch(`${BaseUrl}/logout?realIP=116.25.146.177`, {
       method: "POST",
       credentials: "include",
       headers: httpHeader,

@@ -1,3 +1,10 @@
+/*
+ * @Author: tohsaka888
+ * @Date: 2022-08-04 11:48:19
+ * @LastEditors: tohsaka888
+ * @LastEditTime: 2022-08-04 14:49:48
+ * @Description: 请填写简介
+ */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -33,7 +40,7 @@ export default function Playlist() {
   useEffect(() => {
     const sendReuqest = async () => {
       const res = await fetch(
-        `${BaseUrl}/top/playlist?limit=35&offset=${35 * page}&cat=${category}`
+        `${BaseUrl}/top/playlist?limit=35&offset=${35 * page}&cat=${category}&realIP=116.25.146.177`
       );
       const data = await res.json();
       console.log(data);
