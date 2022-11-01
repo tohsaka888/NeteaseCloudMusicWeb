@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/node": "17.0.25",
     "@types/react": "18.0.24",
-    "@types/react-dom": "18.0.6",
+    "@types/react-dom": "18.0.8",
     "@types/styled-components": "5.1.26"
   },
   "scripts": {
