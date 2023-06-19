@@ -25,7 +25,7 @@
     "react-spring": "9.5.2",
     "serve": "14.0.1",
     "styled-components": "5.3.5",
-    "typescript": "4.7.4",
+    "typescript": "4.9.5",
     "usehooks-ts": "2.6.0"
   },
   "devDependencies": {
