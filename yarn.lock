@@ -10708,10 +10708,12 @@ use-sidecar@^1.1.2:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
 
-usehooks-ts@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-2.6.0.tgz#aebab367da2350a0bee1c3749bc6dd4bcce3eaae"
-  integrity sha512-Kj/4oc2nOxRDGTDb2v1ZulF7+tpeXFuqI6cUesM0Vic7TPPDlFORxKh4ivsYg+NTvX/YbM+lhqqkfFTiIt23eg==
+usehooks-ts@2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/usehooks-ts/-/usehooks-ts-2.16.0.tgz#31deaa2f1147f65666aae925bd890b54e63b0d3f"
+  integrity sha512-bez95WqYujxp6hFdM/CpRDiVPirZPxlMzOH2QB8yopoKQMXpscyZoxOjpEdaxvV+CAWUDSM62cWnqHE0E/MZ7w==
+  dependencies:
+    lodash.debounce "^4.0.8"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
